@@ -53,6 +53,7 @@ public class Module extends ReactContextBaseJavaModule {
     Toast.makeText(getReactApplicationContext(), message, duration).show();
   }
 
+  /*
   @ReactMethod
   public void testRead(){
       mNfcReadFragment = (NFCReader) getFragmentManager().findFragmentByTag(NFCReader.TAG);
@@ -61,4 +62,5 @@ public class Module extends ReactContextBaseJavaModule {
       }
       this.show(getFragmentManager(),NFCReadFragment.TAG);
   }
+  */
 }
