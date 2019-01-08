@@ -12,7 +12,7 @@ import java.util.List;
 
 public class Package implements ReactPackage {
 
-    @Override
+    // Deprecated in React Native 0.47
     public List<Class<? extends JavaScriptModule>> createJSModules() {
         return Collections.emptyList();
     }
@@ -23,12 +23,13 @@ public class Package implements ReactPackage {
     }
 
     @Override
-    public List<NativeModule> createNativeModules(
-            ReactApplicationContext reactContext) {
+    public List<NativeModule> createNativeModules( ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
 
         modules.add(new Module(reactContext));
 
         return modules;
     }
+
+
 }
