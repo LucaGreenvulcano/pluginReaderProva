@@ -34,12 +34,12 @@ public class Module extends ReactContextBaseJavaModule {
     super(reactContext);
   }
 
-  @Override
+
   public String getName() {
     return "Boilerplate";
   }
 
-  @Override
+
   public Map<String, Object> getConstants() {
     final Map<String, Object> constants = new HashMap<>();
     constants.put(DURATION_SHORT_KEY, Toast.LENGTH_SHORT);
@@ -47,7 +47,7 @@ public class Module extends ReactContextBaseJavaModule {
     return constants;
   }
 
-  @ReactMethod
+
   public void show(String message, int duration) {
     Toast.makeText(getReactApplicationContext(), message, duration).show();
   }
