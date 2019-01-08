@@ -15,13 +15,13 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
-public class NFCReadFragment extends DialogFragment {
+public class NFCReader extends DialogFragment {
 
     public static final String TAG = NFCReadFragment.class.getSimpleName();
 
     public static NFCReadFragment newInstance() {
 
-        return new NFCReadFragment();
+        return new NFCReader();
     }
 
     private TextView mTvMessage;
