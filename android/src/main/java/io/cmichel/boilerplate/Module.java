@@ -28,7 +28,7 @@ public class Module extends ReactContextBaseJavaModule {
 
   private static final String DURATION_SHORT_KEY = "SHORT";
   private static final String DURATION_LONG_KEY = "LONG";
-  private NFCReader mNfcReadFragment;
+  private NFCReader mNFCReader;
 
 
   public Module(ReactApplicationContext reactContext) {
@@ -56,11 +56,11 @@ public class Module extends ReactContextBaseJavaModule {
   /*
   @ReactMethod
   public void testRead(){
-      mNfcReadFragment = (NFCReader) getFragmentManager().findFragmentByTag(NFCReader.TAG);
-      if (mNfcReadFragment == null) {
-        mNfcReadFragment = NFCReader.newInstance();
+      mNFCReader = (NFCReader) getFragmentManager().findFragmentByTag(NFCReader.TAG);
+      if (mNFCReader == null) {
+        mNFCReader = NFCReader.newInstance();
       }
-      this.show(getFragmentManager(),NFCReadFragment.TAG);
+      this.show(getFragmentManager(),NFCReader.TAG);
   }
   */
 }

@@ -17,9 +17,9 @@ import java.io.IOException;
 
 public class NFCReader extends DialogFragment {
 
-    public static final String TAG = NFCReadFragment.class.getSimpleName();
+    public static final String TAG = NFCReader.class.getSimpleName();
 
-    public static NFCReadFragment newInstance() {
+    public static NFCReader newInstance() {
 
         return new NFCReader();
     }
