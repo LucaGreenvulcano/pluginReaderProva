@@ -1,35 +1,78 @@
 package io.cmichel.boilerplate;
 
-import com.facebook.react.ReactPackage;
-import com.facebook.react.bridge.JavaScriptModule;
-import com.facebook.react.bridge.NativeModule;
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.uimanager.ViewManager;
+import android.app.DialogFragment;
+import android.content.Context;
+import android.nfc.FormatException;
+import android.nfc.NdefMessage;
+import android.nfc.tech.Ndef;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.io.IOException;
 
-public class Package implements ReactPackage {
+public class NFCReadFragment extends DialogFragment {
 
-    // Deprecated in React Native 0.47
-    public List<Class<? extends JavaScriptModule>> createJSModules() {
-        return Collections.emptyList();
+    public static final String TAG = NFCReadFragment.class.getSimpleName();
+
+    public static NFCReadFragment newInstance() {
+
+        return new NFCReadFragment();
+    }
+
+    private TextView mTvMessage;
+    private Listener mListener;
+
+    /*
+        @Nullable
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+            // View view = inflater.inflate(R.layout.fragment_read,container,false);
+            // initViews(view);
+            // return view;
+        }
+    */
+    private void initViews(View view) {
+
+        // mTvMessage = (TextView) view.findViewById(R.id.tv_message);
     }
 
     @Override
-    public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        return Collections.emptyList();
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        //mListener = (MainActivity)context;
+        mListener.onDialogDisplayed();
     }
 
     @Override
-    public List<NativeModule> createNativeModules( ReactApplicationContext reactContext) {
-        List<NativeModule> modules = new ArrayList<>();
-
-        modules.add(new Module(reactContext));
-
-        return modules;
+    public void onDetach() {
+        super.onDetach();
+        mListener.onDialogDismissed();
     }
 
+    public void onNfcDetected(Ndef ndef){
 
+        readFromNFC(ndef);
+    }
+
+    private void readFromNFC(Ndef ndef) {
+
+        try {
+            ndef.connect();
+            NdefMessage ndefMessage = ndef.getNdefMessage();
+            String message = new String(ndefMessage.getRecords()[0].getPayload());
+            Log.d(TAG, "readFromNFC: "+message);
+            mTvMessage.setText(message);
+            ndef.close();
+
+        } catch (IOException | FormatException e) {
+            e.printStackTrace();
+
+        }
+    }
 }
