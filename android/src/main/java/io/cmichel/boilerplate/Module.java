@@ -31,12 +31,10 @@ public class Module extends ReactContextBaseJavaModule {
     return constants;
   }
 
-  /*
   @ReactMethod
   public void show(String message, int duration) {
     Toast.makeText(getReactApplicationContext(), message, duration).show();
   }
-  */
 
   @ReactMethod
   public void prova(String message, int duration) {
