@@ -27,17 +27,17 @@ public class NFCReadFragment extends DialogFragment {
     private TextView mTvMessage;
     private Listener mListener;
 
+/*
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         // View view = inflater.inflate(R.layout.fragment_read,container,false);
-        initViews(view);
+        //initViews(view);
         return view;
     }
-
+*/
     private void initViews(View view) {
-
       //  mTvMessage = (TextView) view.findViewById(R.id.tv_message);
     }
 
