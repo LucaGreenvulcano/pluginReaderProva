@@ -36,10 +36,11 @@ public class NFCReadFragment extends DialogFragment {
         //initViews(view);
         return view;
     }
-*/
+
     private void initViews(View view) {
       //  mTvMessage = (TextView) view.findViewById(R.id.tv_message);
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -54,6 +55,7 @@ public class NFCReadFragment extends DialogFragment {
         mListener.onDialogDismissed();
     }
 
+*/
     public void onNfcDetected(Ndef ndef){
 
         readFromNFC(ndef);
