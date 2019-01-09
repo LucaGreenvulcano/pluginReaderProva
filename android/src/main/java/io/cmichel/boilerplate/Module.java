@@ -9,10 +9,28 @@ import com.facebook.react.bridge.ReactMethod;
 import java.util.HashMap;
 import java.util.Map;
 
+
+//NFC
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.nfc.NfcAdapter;
+import android.nfc.Tag;
+import android.nfc.tech.Ndef;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+
 public class Module extends ReactContextBaseJavaModule {
 
   private static final String DURATION_SHORT_KEY = "SHORT";
   private static final String DURATION_LONG_KEY = "LONG";
+
+  private NFCReadFragment mNfcReadFragment;
 
   public Module(ReactApplicationContext reactContext) {
     super(reactContext);
@@ -37,7 +55,9 @@ public class Module extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void prova(String message, int duration) {
-    Toast.makeText(getReactApplicationContext(), message, duration).show();
+  public void prova() {
+    Ndef ndef = Ndef.get(intent.getParcelableExtra(NfcAdapter.EXTRA_TAG));
+    mNfcReadFragment = (NFCReadFragment)getFragmentManager().findFragmentByTag(NFCReadFragment.TAG);
+    mNfcReadFragment.onNfcDetected(ndef);
   }
 }
