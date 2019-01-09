@@ -57,7 +57,6 @@ public class Module extends ReactContextBaseJavaModule {
   @ReactMethod
   public void prova() {
     Ndef ndef = Ndef.get(intent.getParcelableExtra(NfcAdapter.EXTRA_TAG));
-    mNfcReadFragment = (NFCReadFragment)getFragmentManager().findFragmentByTag(NFCReadFragment.TAG);
     mNfcReadFragment.onNfcDetected(ndef);
   }
 }
