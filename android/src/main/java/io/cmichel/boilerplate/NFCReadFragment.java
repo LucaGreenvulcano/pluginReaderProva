@@ -44,7 +44,7 @@ public class NFCReadFragment extends DialogFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mListener = (MainActivity)context;
+        mListener = (Package)context;
         mListener.onDialogDisplayed();
     }
 
