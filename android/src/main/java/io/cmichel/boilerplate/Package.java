@@ -10,6 +10,22 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
+//NFC
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.nfc.NfcAdapter;
+import android.nfc.Tag;
+import android.nfc.tech.Ndef;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+
 public class Package implements ReactPackage {
 
     // Deprecated in React Native 0.47
