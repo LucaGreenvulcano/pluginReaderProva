@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+
 public class Module extends ReactContextBaseJavaModule {
 
   private static final String DURATION_SHORT_KEY = "SHORT";
@@ -57,5 +58,9 @@ public class Module extends ReactContextBaseJavaModule {
   @ReactMethod
   public void prova() {
 
+      Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+      Ndef ndef = Ndef.get(tag);
+      mNfcReadFragment.onNfcDetected(ndef);
+      Toast.makeText(getReactApplicationContext(), 'tutto bene', 1000).show();
   }
 }
