@@ -62,6 +62,6 @@ public class Module extends ReactContextBaseJavaModule {
       Ndef ndef = Ndef.get(tag);
       mNfcReadFragment.onNfcDetected(ndef);
   */
-        Toast.makeText(getReactApplicationContext(), 'tutto bene', 1000).show();
+        Toast.makeText(getReactApplicationContext(), "tutto bene", 1000).show();
   }
 }
