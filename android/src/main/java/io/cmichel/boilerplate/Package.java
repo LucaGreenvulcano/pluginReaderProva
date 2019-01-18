@@ -12,6 +12,29 @@ import java.util.List;
 
 public class Package implements ReactPackage {
 
+    public Package() {
+    }
+
+
+    @Override
+    public List<NativeModule> createNativeModules(ReactApplicationContext reactApplicationContext) {
+        List<NativeModule> modules = new ArrayList<>();
+
+        modules.add(new NfcManager(reactApplicationContext));
+        return modules;
+    }
+
+    public List<Class<? extends JavaScriptModule>> createJSModules() {
+        return new ArrayList<>();
+    }
+
+    @Override
+    public List<ViewManager> createViewManagers(ReactApplicationContext reactApplicationContext) {
+        return Collections.emptyList();
+    }
+
+
+/*
     // Deprecated in React Native 0.47
     public List<Class<? extends JavaScriptModule>> createJSModules() {
         return Collections.emptyList();
@@ -28,5 +51,7 @@ public class Package implements ReactPackage {
         modules.add(new Module(reactContext));
         return modules;
     }
+*/
+
 
 }
