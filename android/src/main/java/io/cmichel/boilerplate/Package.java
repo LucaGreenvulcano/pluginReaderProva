@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
 public class Package implements ReactPackage {
 
     // Deprecated in React Native 0.47
@@ -26,11 +25,8 @@ public class Package implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules( ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
-
         modules.add(new Module(reactContext));
-
         return modules;
     }
-
 
 }
