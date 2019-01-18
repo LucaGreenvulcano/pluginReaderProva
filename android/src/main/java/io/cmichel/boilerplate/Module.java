@@ -57,12 +57,6 @@ public class Module extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void prova() {
-    /*
-     IntentView intent;
-      Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-      Ndef ndef = Ndef.get(tag);
-      mNfcReadFragment.onNfcDetected(ndef);
-*/
       Toast.makeText(getReactApplicationContext(), "tutto bene di boilerplate", 2000).show();
   }
 }
