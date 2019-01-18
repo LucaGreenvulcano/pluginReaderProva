@@ -23,5 +23,13 @@
   },
   "peerDependencies": {
     "react-native": ">=0.38.0"
-  }
+  },
+  "files": [
+    "NfcManager.js",
+    "ndef-lib",
+    "index.d.ts",
+    "android",
+    "ios",
+    "example"
+  ],
 }

@@ -7,7 +7,7 @@ import {
 import NdefParser from './NdefParser'
 import Ndef from './ndef-lib'
 
-const NativeNfcManager = NativeModules.NfcManager;
+const NativeNfcManager = NativeModules.NfcManagerDue;
 const NfcManagerEmitter = new NativeEventEmitter(NativeNfcManager);
 
 const Events = {
@@ -23,7 +23,7 @@ const NfcTech = {
 
 const LOG = 'NfcManagerJs';
 
-class NfcManager {
+class NfcManagerDue {
   constructor() {
     this._clientTagDiscoveryListener = null;
     this._clientSessionClosedListener = null;
@@ -32,7 +32,7 @@ class NfcManager {
 
   start({ onSessionClosedIOS } = {}) {
     return new Promise((resolve, reject) => {
-      NativeNfcManager.start((err, result) => {
+      NativeNfcManagerDue.start((err, result) => {
         if (err) {
           reject(err);
         } else {
@@ -391,7 +391,7 @@ class NfcManager {
   }
 }
 
-export default new NfcManager();
+export default new NfcManagerDue();
 
 export {
   NdefParser,
