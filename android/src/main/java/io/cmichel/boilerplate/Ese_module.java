@@ -14,7 +14,6 @@ public class Ese_module extends ReactContextBaseJavaModule {
   private static final String DURATION_SHORT_KEY = "SHORT";
   private static final String DURATION_LONG_KEY = "LONG";
 
-  private NFCReadFragment mNfcReadFragment;
 
   public Ese_module(ReactApplicationContext reactContext) {
     super(reactContext);
