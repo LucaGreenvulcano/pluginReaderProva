@@ -14,6 +14,9 @@ import android.provider.Settings;
 import com.facebook.react.bridge.*;
 import com.facebook.react.modules.core.RCTNativeAppEventEmitter;
 
+import android.widget.Toast;
+
+
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -451,6 +454,7 @@ class NfcManagerDue extends ReactContextBaseJavaModule implements ActivityEventL
 
 	@ReactMethod
     private void registerTagEvent(String alertMessage, Boolean invalidateAfterFirstRead, Callback callback) {
+		Toast.makeText(getReactApplicationContext(), "tutto bene", 1000).show();
         Log.d(LOG_TAG, "registerTag");
 		isForegroundEnabled = true;
 
