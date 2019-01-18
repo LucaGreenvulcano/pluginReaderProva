@@ -20,7 +20,7 @@ public class Package implements ReactPackage {
     public List<NativeModule> createNativeModules(ReactApplicationContext reactApplicationContext) {
         List<NativeModule> modules = new ArrayList<>();
 
-        modules.add(new NfcManager(reactApplicationContext));
+        modules.add(new NfcManagerDue(reactApplicationContext));
         return modules;
     }
 

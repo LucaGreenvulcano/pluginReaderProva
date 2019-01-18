@@ -47,7 +47,7 @@ import android.content.pm.PackageManager;
 import android.nfc.tech.MifareClassic;
 import android.nfc.tech.MifareUltralight;
 
-class NfcManager extends ReactContextBaseJavaModule implements ActivityEventListener, LifecycleEventListener {
+class NfcManagerDue extends ReactContextBaseJavaModule implements ActivityEventListener, LifecycleEventListener {
 	private static final String LOG_TAG = "ReactNativeNfcManager";
     private final List<IntentFilter> intentFilters = new ArrayList<IntentFilter>();
     private final ArrayList<String[]> techLists = new ArrayList<String[]>();
@@ -72,7 +72,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		}
 	}
 
-    public NfcManager(ReactApplicationContext reactContext) {
+    public NfcManagerDue(ReactApplicationContext reactContext) {
         super(reactContext);
         context = reactContext;
         this.reactContext = reactContext;
@@ -83,7 +83,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 	@Override
 	public String getName() {
-		return "NfcManager";
+		return "NfcManagerDue";
 	}
 
 	private boolean hasPendingRequest() {
