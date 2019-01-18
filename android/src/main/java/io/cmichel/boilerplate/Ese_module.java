@@ -39,11 +39,6 @@ public class Ese_module extends ReactContextBaseJavaModule {
 
   @ReactMethod
   public void prova() {
-/*
-      Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-      Ndef ndef = Ndef.get(tag);
-      mNfcReadFragment.onNfcDetected(ndef);
-*/
       Toast.makeText(getReactApplicationContext(), "tutto bene", 1000).show();
   }
 }
