@@ -1,4 +1,4 @@
-package community.revteltech.nfcboil;
+package prova.plugin.boilnfc;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;

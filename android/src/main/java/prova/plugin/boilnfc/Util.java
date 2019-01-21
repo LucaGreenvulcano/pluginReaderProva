@@ -1,4 +1,6 @@
-package community.revteltech.nfcboil;
+
+package prova.plugin.boilnfc;
+
 
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
