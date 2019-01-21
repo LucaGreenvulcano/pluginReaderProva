@@ -21,9 +21,9 @@ const NfcTech = {
   NfcA: 'NfcA',
 }
 
-const LOG = 'NfcManagerJs';
+const LOG = 'BoilerplateJs';
 
-class NfcManagerDue {
+class NfcManager {
   constructor() {
     this._clientTagDiscoveryListener = null;
     this._clientSessionClosedListener = null;
@@ -32,7 +32,7 @@ class NfcManagerDue {
 
   start({ onSessionClosedIOS } = {}) {
     return new Promise((resolve, reject) => {
-      NativeNfcManagerDue.start((err, result) => {
+      NativeNfcManager.start((err, result) => {
         if (err) {
           reject(err);
         } else {
@@ -391,7 +391,7 @@ class NfcManagerDue {
   }
 }
 
-export default new NfcManagerDue();
+export default new Boilerplate();
 
 export {
   NdefParser,
