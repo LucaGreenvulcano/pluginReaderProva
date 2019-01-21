@@ -1,4 +1,4 @@
-package community.revteltech.nfcboilboil;
+package community.revteltech.nfcboil;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
