@@ -9,7 +9,7 @@ import {
     TextInput,
     ScrollView,
 } from 'react-native';
-import NfcManager, {Ndef} from 'react-native-nfc-manager';
+import NfcManager, {Ndef} from 'react-native-android-library-boilerplate';
 
 const RtdType = {
     URL: 0,

@@ -1,10 +1,10 @@
 import { EmitterSubscription } from "react-native";
 
-// Type definitions for react-native-nfc-manager
-// Project: https://github.com/whitedogg13/react-native-nfc-manager
+// Type definitions for react-native-android-library-boilerplate
+// Project: https://github.com/whitedogg13/react-native-android-library-boilerplate
 // Definitions by: April Ayres <april.ayres@papercut.com> and Paul Huynh <paul.huynh@papercut.com>
 
-declare module 'react-native-nfc-manager' {
+declare module 'react-native-android-library-boilerplate' {
 	export interface NdefRecord {
 		id?: number[];
 		tnf: number;

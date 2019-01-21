@@ -6,7 +6,7 @@ import {
     ScrollView,
     TextInput,
 } from 'react-native';
-import NfcManager, {NdefParser, NfcTech} from 'react-native-nfc-manager';
+import NfcManager, {NdefParser, NfcTech} from 'react-native-android-library-boilerplate';
 
 function strToBytes(str) {
     let result = [];

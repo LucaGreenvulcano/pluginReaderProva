@@ -1,8 +1,8 @@
-# react-native-nfc-manager
+# react-native-android-library-boilerplate
 
-[![npm version](https://img.shields.io/npm/v/react-native-nfc-manager.svg?style=flat)](https://www.npmjs.com/package/react-native-nfc-manager)
-[![build](https://api.travis-ci.org/whitedogg13/react-native-nfc-manager.svg?branch=master)](https://travis-ci.org/whitedogg13/react-native-nfc-manager)
-[![issues](https://img.shields.io/github/issues/whitedogg13/react-native-nfc-manager.svg?style=flat)](https://github.com/whitedogg13/react-native-nfc-manager/issues)
+[![npm version](https://img.shields.io/npm/v/react-native-android-library-boilerplate.svg?style=flat)](https://www.npmjs.com/package/react-native-android-library-boilerplate)
+[![build](https://api.travis-ci.org/whitedogg13/react-native-android-library-boilerplate.svg?branch=master)](https://travis-ci.org/whitedogg13/react-native-android-library-boilerplate)
+[![issues](https://img.shields.io/github/issues/whitedogg13/react-native-android-library-boilerplate.svg?style=flat)](https://github.com/whitedogg13/react-native-android-library-boilerplate/issues)
 
 Bring NFC feature to React Native. Inspired by [phonegap-nfc](https://github.com/chariotsolutions/phonegap-nfc) and [react-native-ble-manager](https://github.com/innoveit/react-native-ble-manager)
 
@@ -20,19 +20,19 @@ You will need to setup some capabilities / entitlement / plist stuff to enable N
 
 ## Install
 ```shell
-npm i --save react-native-nfc-manager
+npm i --save react-native-android-library-boilerplate
 ```
 
 ### Link Native Library with `react-native link`
 
 ```shell
-react-native link react-native-nfc-manager
+react-native link react-native-android-library-boilerplate
 ```
 
 ### Install with cocopods
 Include this line inside of your Podfile
 ```shell
- pod 'react-native-nfc-manager', :path => '../node_modules/react-native-nfc-manager/'
+ pod 'react-native-android-library-boilerplate', :path => '../node_modules/react-native-android-library-boilerplate/'
  ```
 
 ## Example
@@ -46,7 +46,7 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
 } from 'react-native';
-import App from 'react-native-nfc-manager/example/App'
+import App from 'react-native-android-library-boilerplate/example/App'
 
 AppRegistry.registerComponent('NfcManagerDev', () => App);
 ```
@@ -54,7 +54,7 @@ AppRegistry.registerComponent('NfcManagerDev', () => App);
 ## API
 This library provide a default export `NfcManager` and a named export `NdefParser`, like this:
 ```javascript
-import NfcManager, {Ndef, NdefParser} from 'react-native-nfc-manager'
+import NfcManager, {Ndef, NdefParser} from 'react-native-android-library-boilerplate'
 ```
 
 All methods in `NfcManager` return a `Promise` object and are resolved to different types of data according to individual API.
@@ -190,7 +190,7 @@ Notice you must call `registerTagEvent` first before calling this.
 
 __Arguments__
 - `tech` - `string` - the NFC Technology you want to use 
-    - the available ones are defined in `NfcTech` (please do `import {NfcTech} from 'react-native-nfc-manager`) 
+    - the available ones are defined in `NfcTech` (please do `import {NfcTech} from 'react-native-android-library-boilerplate`)
 
 __Examples__
 > A concrete example using NFC Technology can be found in `examples/AndroidTechTestNdef.js`
@@ -303,7 +303,7 @@ console.log('parsedText: ' + text);
 
 ## NFC Hardware requirement on Android
 
-By default react-native-nfc-manager is set to not require NFC hardware on Android. This setting will overwrite what ever you put in your main AndroidManifest.xml file during `react-native link` phase.
+By default react-native-android-library-boilerplate is set to not require NFC hardware on Android. This setting will overwrite what ever you put in your main AndroidManifest.xml file during `react-native link` phase.
 
 If you want to change this behavior to only have your app support NFC devices you have to override you app manifest manually.
 

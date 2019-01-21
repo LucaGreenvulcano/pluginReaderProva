@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.name = package[:name]
   s.version = package[:version]
   s.license = { type: "MIT" }
-  s.homepage = "https://github.com/whitedogg13/react-native-nfc-manager"
+  s.homepage = "https://github.com/whitedogg13/react-native-android-library-boilerplate"
   s.authors = package[:author]
   s.summary = package[:description]
   s.source = { git: package[:repository][:url] }
