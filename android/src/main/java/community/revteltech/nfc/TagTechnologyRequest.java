@@ -1,5 +1,4 @@
-package io.cmichel.boilerplate;
-
+package community.revteltech.nfc;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;

@@ -1,4 +1,4 @@
-package io.cmichel.boilerplate;
+package community.revteltech.nfc;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;

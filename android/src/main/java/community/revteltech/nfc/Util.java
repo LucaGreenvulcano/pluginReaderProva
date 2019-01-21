@@ -1,4 +1,4 @@
-package io.cmichel.boilerplate;
+package community.revteltech.nfc;
 
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
