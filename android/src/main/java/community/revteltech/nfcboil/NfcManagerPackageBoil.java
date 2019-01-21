@@ -1,4 +1,4 @@
-package community.revteltech.nfc;
+package community.revteltech.nfcboil;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;

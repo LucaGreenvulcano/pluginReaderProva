@@ -1,4 +1,4 @@
-package community.revteltech.nfc;
+package community.revteltech.nfcboil;
 
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;

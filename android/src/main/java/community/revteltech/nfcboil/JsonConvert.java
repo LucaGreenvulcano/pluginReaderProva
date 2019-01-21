@@ -6,7 +6,7 @@
  * Copyright (c) 2015, YunJiang.Fang
  */
 
-package community.revteltech.nfc;
+package community.revteltech.nfcboilboil;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableArray;
