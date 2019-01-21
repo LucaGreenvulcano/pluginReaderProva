@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class NfcManagerPackage implements ReactPackage {
+public class NfcManagerPackageBoil implements ReactPackage {
 
-    public NfcManagerPackage() {
+    public NfcManagerPackageBoil() {
     }
 
     @Override
