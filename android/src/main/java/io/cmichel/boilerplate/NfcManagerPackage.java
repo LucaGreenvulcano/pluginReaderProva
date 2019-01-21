@@ -10,17 +10,16 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Package implements ReactPackage {
+public class NfcManagerPackage implements ReactPackage {
 
-    public Package() {
+    public NfcManagerPackage() {
     }
 
-/*
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactApplicationContext) {
         List<NativeModule> modules = new ArrayList<>();
 
-        modules.add(new NfcManagerDue(reactApplicationContext));
+        modules.add(new NfcManager(reactApplicationContext));
         return modules;
     }
 
@@ -32,26 +31,4 @@ public class Package implements ReactPackage {
     public List<ViewManager> createViewManagers(ReactApplicationContext reactApplicationContext) {
         return Collections.emptyList();
     }
-*/
-
-
-    // Deprecated in React Native 0.47
-    public List<Class<? extends JavaScriptModule>> createJSModules() {
-        return Collections.emptyList();
-    }
-
-    @Override
-    public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        return Collections.emptyList();
-    }
-
-    @Override
-    public List<NativeModule> createNativeModules( ReactApplicationContext reactContext) {
-        List<NativeModule> modules = new ArrayList<>();
-        modules.add(new Module(reactContext));
-        return modules;
-    }
-
-
-
 }

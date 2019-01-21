@@ -14,9 +14,6 @@ import android.provider.Settings;
 import com.facebook.react.bridge.*;
 import com.facebook.react.modules.core.RCTNativeAppEventEmitter;
 
-import android.widget.Toast;
-
-
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -50,7 +47,7 @@ import android.content.pm.PackageManager;
 import android.nfc.tech.MifareClassic;
 import android.nfc.tech.MifareUltralight;
 
-class NfcManagerDue extends ReactContextBaseJavaModule implements ActivityEventListener, LifecycleEventListener {
+class NfcManager extends ReactContextBaseJavaModule implements ActivityEventListener, LifecycleEventListener {
 	private static final String LOG_TAG = "ReactNativeNfcManager";
     private final List<IntentFilter> intentFilters = new ArrayList<IntentFilter>();
     private final ArrayList<String[]> techLists = new ArrayList<String[]>();
@@ -75,7 +72,7 @@ class NfcManagerDue extends ReactContextBaseJavaModule implements ActivityEventL
 		}
 	}
 
-    public NfcManagerDue(ReactApplicationContext reactContext) {
+    public NfcManager(ReactApplicationContext reactContext) {
         super(reactContext);
         context = reactContext;
         this.reactContext = reactContext;
@@ -86,7 +83,7 @@ class NfcManagerDue extends ReactContextBaseJavaModule implements ActivityEventL
 
 	@Override
 	public String getName() {
-		return "NfcManagerDue";
+		return "Boilerplate";
 	}
 
 	private boolean hasPendingRequest() {
@@ -454,7 +451,6 @@ class NfcManagerDue extends ReactContextBaseJavaModule implements ActivityEventL
 
 	@ReactMethod
     private void registerTagEvent(String alertMessage, Boolean invalidateAfterFirstRead, Callback callback) {
-		Toast.makeText(getReactApplicationContext(), "tutto bene", 1000).show();
         Log.d(LOG_TAG, "registerTag");
 		isForegroundEnabled = true;
 
