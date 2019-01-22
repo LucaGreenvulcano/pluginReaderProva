@@ -83,7 +83,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 	@Override
 	public String getName() {
-		return "NfcManager";
+		return "Boilerplate";
 	}
 
 	private boolean hasPendingRequest() {
