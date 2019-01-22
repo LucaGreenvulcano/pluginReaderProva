@@ -43,7 +43,6 @@ import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
 
 import android.content.pm.PackageManager;
 
-
 import android.nfc.tech.MifareClassic;
 import android.nfc.tech.MifareUltralight;
 
