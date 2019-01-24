@@ -583,7 +583,9 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 		// capture all mime-based dispatch NDEF
 		IntentFilter ndef = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
-		ndefIntent = ndef;
+		Activity currentActivity = getCurrentActivity();
+		ndefIntent = currentActivity.getIntent();
+
 		try {
 			ndef.addDataType("*/*");
 		} catch (MalformedMimeTypeException e) {
