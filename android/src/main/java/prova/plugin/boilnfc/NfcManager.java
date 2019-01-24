@@ -15,8 +15,6 @@ import com.facebook.react.bridge.*;
 import com.facebook.react.modules.core.RCTNativeAppEventEmitter;
 
 import android.app.PendingIntent;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.IntentFilter.MalformedMimeTypeException;
 import android.net.Uri;
 import android.nfc.FormatException;
@@ -46,7 +44,58 @@ import android.content.pm.PackageManager;
 import android.nfc.tech.MifareClassic;
 import android.nfc.tech.MifareUltralight;
 
+
+//*******************************
+
+
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.MenuItem;
+import android.widget.TextView;
+import android.content.Intent;
+
+import com.nxp.nfclib.CardType;
+import com.nxp.nfclib.NxpNfcLib;
+import com.nxp.nfclib.desfire.DESFireFactory;
+import com.nxp.nfclib.desfire.IDESFireEV1;
+import com.nxp.nfclib.exceptions.NxpNfcLibException;
+import com.nxp.nfclib.ndef.IType2NdefSupport;
+import com.nxp.nfclib.ndef.NdefMessageWrapper;
+import com.nxp.nfclib.ndef.NdefRecordWrapper;
+import com.nxp.nfclib.ntag.INTag;
+import com.nxp.nfclib.ntag.INTag213215216;
+import com.nxp.nfclib.ntag.NTag213215216;
+import com.nxp.nfclib.ntag.NTagFactory;
+import com.nxp.nfclib.utils.NxpLogUtils;
+import com.nxp.nfclib.utils.Utilities;
+
+import java.nio.charset.Charset;
+import java.util.Locale;
+
+
+
+//*******************************
+
+
 class NfcManager extends ReactContextBaseJavaModule implements ActivityEventListener, LifecycleEventListener {
+
+	//*******
+	private String TAG = MainActivity.class.getSimpleName();
+	private NxpNfcLib m_libInstance = null;  // The TapLinX library instance
+	private TextView m_textView      = null;
+	private TextView mTextMessage;
+	private final String TAPLINX_KEY = "624087dbb8303bc8d62105a1697e6f57";
+	//    private final byte[] pwd = new byte[]{0x01, 0x02, 0x03, 0x04};
+	private final byte[] pwd = new byte[]{0x31, 0x32, 0x33, 0x34};
+	private final byte[] pack = new byte[]{0x00, 0x00};
+	private static final String US_ASCII = "US-ASCII";
+	private static final String UTF_8 = "UTF-8";
+
+	//*******
+
+
 	private static final String LOG_TAG = "ReactNativeNfcManager";
     private final List<IntentFilter> intentFilters = new ArrayList<IntentFilter>();
     private final ArrayList<String[]> techLists = new ArrayList<String[]>();
@@ -56,6 +105,9 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	private Boolean isResumed = false;
 	private WriteNdefRequest writeNdefRequest = null;
 	private TagTechnologyRequest techRequest = null;
+
+	//-----
+	private Intent ndefIntent = null;
 
 	class WriteNdefRequest {
 		NdefMessage message;
@@ -304,8 +356,84 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		}
 	}
 
+
 		//***********************
 
+	private void writeNXP( final Intent intent )
+	{
+		try
+		{
+			CardType cardType = m_libInstance.getCardType( intent );
+
+			if( CardType.NTag213 == cardType )
+			{
+				NTag213215216 tag = (NTag213215216)NTagFactory.getInstance().getNTAG213( m_libInstance.getCustomModules() );
+
+				Log.d( TAG, "Connecting...");
+				tag.getReader().connect();
+
+				Log.d( TAG, "Card Detected: "+tag.getType().getTagName()+"\n\n");
+
+				String msg = "123BRAND|BRAND CODE|MODEL|SIZE";
+				NdefMessageWrapper ndefMW = new NdefMessageWrapper(createTextRecord(msg, Locale.ITALY, true));
+
+				try {
+					Log.d( TAG, "FirstUserpage: "+tag.getFirstUserpage());
+					Log.d( TAG, "LastUserPage: "+tag.getLastUserPage());
+
+					Log.d( TAG, "FirstPageLocked? : "+tag.isPageLocked(tag.getFirstUserpage()));
+					Log.d( TAG, "LastPageLocked? : "+tag.isPageLocked(tag.getLastUserPage()));
+
+					if(tag.isPageLocked(tag.getFirstUserpage())){
+						Log.d( TAG, "Authenticating...");
+						tag.authenticatePwd(pwd, pack);
+
+						if(tag.isPwdAuthenticated()){
+							Log.d( TAG, "Authenticated");
+
+							tag.clear();
+							Log.d( TAG, "tag cleared");
+
+							Log.d( TAG, "Writing "+msg);
+							tag.writeNDEF(ndefMW);
+
+							tag.getReader().close();
+							Log.d( TAG, "DONE!");
+						}
+						else{
+							Log.d( TAG, "NOT Authenticated!!!!");
+						}
+					}
+					else{
+						tag.clear();
+						Log.d( TAG, "tag cleared");
+
+						Log.d( TAG, "Writing "+msg);
+						tag.writeNDEF(ndefMW);
+
+						tag.getReader().close();
+						Log.d( TAG, "DONE!");
+					}
+//                    NxpLogUtils.save();
+				} catch (Exception e) {
+					Log.d( TAG, e.getMessage());
+//                    NxpLogUtils.save();
+				}
+			}
+		}
+		catch( Throwable t )
+		{
+			t.printStackTrace();
+		}
+	}
+
+
+	@ReactMethod
+	public void writePassword(){
+		this.writeNXP(ndefIntent);
+	}
+
+	//***********************
 
 	@ReactMethod
 	public void requestNdefProtectWrite(ReadableArray rnArray, ReadableArray password, ReadableMap options, Callback callback ) {
@@ -455,6 +583,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 		// capture all mime-based dispatch NDEF
 		IntentFilter ndef = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
+		ndefIntent = ndef;
 		try {
 			ndef.addDataType("*/*");
 		} catch (MalformedMimeTypeException e) {
