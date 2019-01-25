@@ -26,17 +26,14 @@ repositories {
 	maven {
 		// All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
 		url "$rootDir/../node_modules/react-native/android"
-
-		credentials {
-			username "sdkuser"
-			password "taplinx"
-		}
 	}
-	google()
-	jcenter()
 }
 
 
 dependencies {
 	compile 'com.facebook.react:react-native:[0.30.0,)'
+	implementation ('taplinx-android:nxpnfcandroidlib:1.5@aar'){
+		transitive = true
+		changing = true
+	}
 }
