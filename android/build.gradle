@@ -33,11 +33,4 @@ repositories {
 dependencies {
 	compile 'com.facebook.react:react-native:[0.30.0,)'
 	androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
-	implementation 'com.google.android.gms:play-services-analytics:16.0.3'
-
-	implementation ('taplinx-android:nxpnfcandroidlib:1.5@aar'){
-		transitive = true
-		changing = true
-	}
 }

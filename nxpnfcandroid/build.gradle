@@ -1,2 +1,12 @@
 configurations.maybeCreate("default")
 artifacts.add("default", file('nxpnfcandroidlib-1.5.aar'))
+dependencies {
+    implementation fileTree(dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation ('taplinx-android:nxpnfcandroidlib:1.5@aar'){
+        transitive = true
+        changing = true
+    }
+}
