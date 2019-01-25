@@ -5,6 +5,10 @@ buildscript {
 
 	dependencies {
 		classpath 'com.android.tools.build:gradle:1.5.0'
+		implementation ('taplinx-android:nxpnfcandroidlib:1.5@aar'){
+			transitive = true
+			changing = true
+		}
 	}
 }
 apply plugin: 'com.android.library'
@@ -32,8 +36,5 @@ repositories {
 
 dependencies {
 	compile 'com.facebook.react:react-native:[0.30.0,)'
-	compile ('taplinx-android:nxpnfcandroidlib:1.5@aar'){
-		transitive = true
-	}
 
 }
