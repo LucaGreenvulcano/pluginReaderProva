@@ -32,8 +32,6 @@ repositories {
 
 dependencies {
 	compile 'com.facebook.react:react-native:[0.30.0,)'
-	implementation ('taplinx-android:nxpnfcandroidlib:1.5@aar'){
-		transitive = true
-		changing = true
-	}
+	compile ('taplinx-android:nxpnfcandroidlib:1.5@aar')
+
 }
