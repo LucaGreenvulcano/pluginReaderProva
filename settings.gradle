@@ -1,0 +1,1 @@
+include ':nxpnfcandroid', ':nxpnfcandroidlib-1.5'
