@@ -1,4 +1,4 @@
-package io.cmichel.boilerplate;
+package prova.plugin.boilnfc;
 
 import android.widget.Toast;
 
