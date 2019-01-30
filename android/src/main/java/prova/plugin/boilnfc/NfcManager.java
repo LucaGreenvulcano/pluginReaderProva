@@ -149,8 +149,8 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	//----------- TOAST
 	@ReactMethod
 	public void show() {
-		String message = 'prova toast';
-		int duration = 1000
+		String message = "prova toast";
+		int duration = 1000;
 		Toast.makeText(getReactApplicationContext(), message, duration).show();
 	}
 
