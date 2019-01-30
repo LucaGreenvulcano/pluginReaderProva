@@ -47,7 +47,7 @@ import android.nfc.tech.MifareUltralight;
 
 //*******************************
 
-
+/*
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -74,7 +74,7 @@ import com.nxp.nfclib.utils.Utilities;
 import java.nio.charset.Charset;
 import java.util.Locale;
 
-
+*/
 
 //*******************************
 
@@ -82,6 +82,7 @@ import java.util.Locale;
 class NfcManager extends ReactContextBaseJavaModule implements ActivityEventListener, LifecycleEventListener {
 
 	//*******
+	/*
 	private String TAG = MainActivity.class.getSimpleName();
 	private NxpNfcLib m_libInstance = null;  // The TapLinX library instance
 	private TextView m_textView      = null;
@@ -92,7 +93,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	private final byte[] pack = new byte[]{0x00, 0x00};
 	private static final String US_ASCII = "US-ASCII";
 	private static final String UTF_8 = "UTF-8";
-
+	*/
 	//*******
 
 
@@ -358,7 +359,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 
 		//***********************
-
+/*
 	private void writeNXP( final Intent intent )
 	{
 		try
@@ -432,7 +433,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	public void writePassword(){
 		this.writeNXP(ndefIntent);
 	}
-
+*/
 	//***********************
 
 	@ReactMethod
