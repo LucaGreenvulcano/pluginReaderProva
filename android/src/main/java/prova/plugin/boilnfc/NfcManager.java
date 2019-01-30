@@ -46,8 +46,9 @@ import android.nfc.tech.MifareUltralight;
 
 
 //*******************************
+//			/*
 
-/*
+
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
@@ -74,8 +75,7 @@ import com.nxp.nfclib.utils.Utilities;
 import java.nio.charset.Charset;
 import java.util.Locale;
 
-*/
-
+//				*/
 //*******************************
 
 
