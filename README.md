@@ -1,361 +1,71 @@
-# react-native-android-library-boilerplate
+## React Native Android Library Boilerplate
+This project serves as a boilerplate to create custom React Native native modules that can later be installed through NPM and easily be used in production.
 
-[![npm version](https://img.shields.io/npm/v/react-native-android-library-boilerplate.svg?style=flat)](https://www.npmjs.com/package/react-native-android-library-boilerplate)
-[![build](https://api.travis-ci.org/whitedogg13/react-native-android-library-boilerplate.svg?branch=master)](https://travis-ci.org/whitedogg13/react-native-android-library-boilerplate)
-[![issues](https://img.shields.io/github/issues/whitedogg13/react-native-android-library-boilerplate.svg?style=flat)](https://github.com/whitedogg13/react-native-android-library-boilerplate/issues)
+## Getting started
+1. Clone the project
+2. Customize the project name by doing the following:
+    * Edit `author` and `name` in `package.json`
+    * Customize the Java package name (`com.domain.package`) as follows:
+        1. Modify it in `android/src/main/AndroidManifest.xml`.
+        2. Rename the folders starting from `android/src/main/java` to match your package name.
+        3. Adjust `package io.cmichel.boilerplate;` in the top of the `Module.java` and `Package.java` files in `android/src/main//java/package/path` to match it.
+    * Edit the name of your module in 
 
-Bring NFC feature to React Native. Inspired by [phonegap-nfc](https://github.com/chariotsolutions/phonegap-nfc) and [react-native-ble-manager](https://github.com/innoveit/react-native-ble-manager)
-
-Contributions are welcome!
-
-## Supported Platforms
-- Android (API 10+)
-- iOS (iOS11 with iPhone 7/7+, 8/8+, 10)
-
-## iOS Setup 
-
-You will need to setup some capabilities / entitlement / plist stuff to enable NFC development on your device, this repo explains these requirements very well:
-
-* https://github.com/hansemannn/iOS11-NFC-Example 
-
-## Install
-```shell
-npm i --save react-native-android-library-boilerplate
-```
-
-### Link Native Library with `react-native link`
-
-```shell
-react-native link react-native-android-library-boilerplate
-```
-
-### Install with cocopods
-Include this line inside of your Podfile
-```shell
- pod 'react-native-android-library-boilerplate', :path => '../node_modules/react-native-android-library-boilerplate/'
- ```
-
-## Example
-
-Look into `example/App.js` as a starting point.
-
-The easiest way to test is simple make your `AppRegistry` point to our example component, like this:
-```javascript
-// in your index.ios.js or index.android.js
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-} from 'react-native';
-import App from 'react-native-android-library-boilerplate/example/App'
-
-AppRegistry.registerComponent('NfcManagerDev', () => App);
-```
-
-## API
-This library provide a default export `NfcManager` and a named export `NdefParser`, like this:
-```javascript
-import NfcManager, {Ndef, NdefParser} from 'react-native-android-library-boilerplate'
-```
-
-All methods in `NfcManager` return a `Promise` object and are resolved to different types of data according to individual API.
-
-`Ndef` is an utility module to encode and decode some well-known NDEF format.
-
-* `NdefParser` is an old utility class to parse some well-known NDEF format, which will be deprecated later.
-
-## NfcManager API
-
-### start({onSessionClosedIOS})
-Init the module. If the device doesn't support NFC, the returning promise will be rejected.
-
-__Arguments__
-- `onSessionClosedIOS` - `function` - [iOS only] the callback to invoke when an `NFCNDEFReaderSession` becomes invalidated
-
-__Examples__
-```js
-NfcManager.start({
-    onSessionClosedIOS: () => {
-        console.log('ios session closed');
-    }
-})
-    .then(result => {
-        console.log('start OK', result);
-    })
-    .catch(error => {
-        console.warn('device does not support nfc!');
-        this.setState({supported: false});
-    })
-```
-
-### stop()
-Terminates the module. This will remove the onSessionClosedIOS listener that is attached in the `start` function.
-
-### isSupported() 
-Chck if the NFC is supported by hardware.
-Returned `Promise` resolved to a boolean value to indicate whether NFC is supported.
-
-### isEnabled() [Android only]
-Check if the NFC is enabled.
-Returned `Promise` resolved to a boolean value to indicate whether NFC is enabled.
-
-### goToNfcSetting() [Android only]
-Direct the user to NFC setting.
-
-### getLaunchTagEvent() [Android only]
-Get the NFC tag object which launches the app.
-Returned `Promise` resolved to the NFC tag object launching the app and resolved to null if the app isn't launched by NFC tag.
-
-### registerTagEvent(listener, alertMessage, invalidateAfterFirstRead)
-Start to listen to *ANY* NFC tags.
-
-__Arguments__
-- `listener` - `function` - the callback when discovering NFC tags
-- `alertMessage` - `string` - (iOS) the message to display on iOS when the NFCScanning pops up
-- `invalidateAfterFirstRead` - `boolean` - (iOS) when set to true this will not have you prompt to click done after NFC Scan.
-
-__Examples__
-```js
-NfcManager.registerTagEvent(tag => {
-    console.log('Tag Discovered', tag);
-}, 'Hold your device over the tag', true)
-```
-
-### unregisterTagEvent()
-Stop listening to NFC tags.
-
-### requestNdefWrite(bytes, options) [Android only]
-Request writing **NdefMessage** (constructed by `bytes` array you passed) into next discovered tag.
-Notice you must call `registerTagEvent` first before calling this. 
-
-__Arguments__
-- `bytes` - `array` - the full NdefMessage, which is an array of number
-- `options` - `object` - optional argument used to trigger actions such as `format` or `formatReadOnly`
-
-__Examples__
-```js
-// write ndef
-NfcManager.requestNdefWrite(bytes)
-    .then(() => console.log('write completed'))
-    .catch(err => console.warn(err))
-
-// request ndef formating (first argument can be null in this case)
-NfcManager.requestNdefWrite(null, {format: true})
-    .then(() => console.log('format completed'))
-    .catch(err => console.warn(err))
-```
-
-### cancelNdefWrite() [Android only]
-Cancel the pending ndef writing operation.
-
-### onStateChanged(listener) [Android only]
-Listen to NFC state change (on/off/turning_on/turning_off)
-
-__Arguments__
-- `listener` - `function` - the callback when NFC state changed
-
-__Examples__
-```js
-NfcManager.onStateChanged(
-    event => {
-        if (event.state === 'on') {
-            // do whatever you want
-        } else if (event.state === 'off') {
-            // do whatever you want
-        } else if (event.state === 'turning_on') {
-            // do whatever you want
-        } else if (event.state === 'turning_off') {
-            // do whatever you want
+        ```java
+        @Override
+        public String getName() {
+            return "Boilerplate";
         }
-    }
-)
-    .then(sub => {
-        this._stateChangedSub = sub; 
-        // remember to call this._stateChangedSub.remove()
-        // when you don't want to listen to this anymore
-    })
-    .catch(err => {
-        console.warn(err);
-    })
-```
+        ```
 
-### requestTechnology(tech) [Android only]
-Request specific NFC Technology to perform advanced actions. 
-- Please refer to [Android Advanced NFC Guide](https://stuff.mit.edu/afs/sipb/project/android/docs/guide/topics/connectivity/nfc/advanced-nfc.html) to understand what a `NFC Technology` means.
+        and adjust it in `index.android.js`
+3. Modify/Build the Project in Android Studio
+    * Start `Android Studio` and select `File -> New -> Import Project` and select the **android** folder of this package.
+    * If you get a `Plugin with id 'android-library' not found` Error, install `android support repository`.
+    * If you get asked to upgrade _gradle_ to a new version, you can skip it.
 
-> This method returns a promise:
-> * if resolved, it means you already find and connect to the tag supporting the requested technology, so the technology specific API can be called. 
-> * if rejected, it means either the request is cancelled or the discovered tag doesn't support the requested technology.
+## Installing it as a library in your main project
+There are many ways to do this, here's the way I do it:
 
-Notice you must call `registerTagEvent` first before calling this. 
+1. Push it to **GitHub**.
+2. Do `npm install --save git+https://github.com/MrToph/react-native-android-library-boilerplate.git` in your main project.
+3. Link the library:
+    * Add the following to `android/settings.gradle`:
+        ```
+        include ':react-native-android-library-boilerplate'
+        project(':react-native-android-library-boilerplate').projectDir = new File(settingsDir, '../node_modules/react-native-android-library-boilerplate/android')
+        ```
 
-__Arguments__
-- `tech` - `string` - the NFC Technology you want to use 
-    - the available ones are defined in `NfcTech` (please do `import {NfcTech} from 'react-native-android-library-boilerplate`)
+    * Add the following to `android/app/build.gradle`:
+        ```xml
+        ...
 
-__Examples__
-> A concrete example using NFC Technology can be found in `examples/AndroidTechTestNdef.js`
+        dependencies {
+            ...
+            compile project(':react-native-android-library-boilerplate')
+        }
+        ```
+    * Add the following to `android/app/src/main/java/**/MainApplication.java`:
+        ```java
+        package com.motivation;
 
-### cancelTechnologyRequest() [Android only]
-Cancel previous NFC Technology request. 
+        import io.cmichel.boilerplate.Package;  // add this for react-native-android-library-boilerplate
 
-### closeTechnology() [Android only]
-When all your NFC Technology operations are finished, you should call this API to disconnect from the tag and release resources.
+        public class MainApplication extends Application implements ReactApplication {
 
-### setNdefPushMessage(bytes) [Android only]
-This API triggers [**Android Beam**](https://developer.android.com/guide/topics/connectivity/nfc/nfc#p2p), it can send Ndef (constructed by `bytes` array you passed) to remote device.
-Notice you must call `registerTagEvent` first before calling this. 
-
-> When you want to cancel the Ndef sending, simply call this API again and pass `null` to it.
-
-__Arguments__
-- `bytes` - `array` - the full NdefMessage, which is an array of number
-
-__Examples__
-
-> Please see `examples/App.js` for a concrete example
-
-```js
-// register Android Beam 
-NfcManager.setNdefPushMessage(bytes)
-    .then(() => console.log('ready to beam'))
-    .catch(err => console.warn(err))
-
-// cancel Android Beam
-NfcManager.setNdefPushMessage(null)
-    .then(() => console.log('beam cancelled'))
-    .catch(err => console.warn(err))
-```
-
-## Ndef API 
-
-This module is integrated from [`ndef-js`](https://github.com/don/ndef-js) to perform Ndef encoding & decoding. Great thanks for their brilliant work!
-
-We mainly remove the dependency to NodeJS `Buffer` and maintain most of the original structure.
-
-### Encode example:
-
-```js
-let bytes = Ndef.encodeMessage([
-    Ndef.textRecord("hello, world"),
-    Ndef.uriRecord("http://nodejs.org"),
-]);
-
-// then you can pass `bytes` into API such as NfcManager.requestNdefWrite()
-}
-```
-
-### Decode example:
-
-```js
-_onTagDiscovered = tag => {
-    console.log('Tag Discovered', tag);
-    this.setState({ tag });
-
-    let parsed = null;
-    if (tag.ndefMessage && tag.ndefMessage.length > 0) {
-        // ndefMessage is actually an array of NdefRecords, 
-        // and we can iterate through each NdefRecord, decode its payload 
-        // according to its TNF & type
-        const ndefRecords = tag.ndefMessage;
-
-        function decodeNdefRecord(record) {
-            if (Ndef.isType(record, Ndef.TNF_WELL_KNOWN, Ndef.RTD_TEXT)) {
-                return ['text', Ndef.text.decodePayload(record.payload)];
-            } else if (Ndef.isType(record, Ndef.TNF_WELL_KNOWN, Ndef.RTD_URI)) {
-                return ['uri', Ndef.uri.decodePayload(record.payload)];
+            @Override
+            protected List<ReactPackage> getPackages() {
+                return Arrays.<ReactPackage>asList(
+                    new MainReactPackage(),
+                    new Package()     // add this for react-native-android-library-boilerplate
+                );
             }
-
-            return ['unknown', '---']
         }
+        ```
+4. Simply `import/require` it by the name defined in your library's `package.json`:
 
-        parsed = ndefRecords.map(decodeNdefRecord);
-    }
-
-    this.setState({parsed});
-}
-```
-
-## NdefParser API (deprecated, please use `Ndef` instead)
-
-### parseUri(ndef)
-Try to parse RTD_URI from a NdefMessage, return an object with an `uri` property.
-
-__Arguments__
-- `ndef` - `object` - this object should be obtained from nfc tag object with this form: `tag.ndefMessage[0]`. (NFC tag object can be obtained by `getLaunchTagEvent` or `registerTagEvent`)
-
-__Examples__
-```js
-let {uri} = NdefParser.parseUri(sampleTag.ndefMessage[0]);
-console.log('parseUri: ' + uri);
-```
-
-### parseText(ndef)
-Try to parse RTD_TEXT from a NdefMessage, return parsed string or null if the operation fail. Currently only support utf8.
-
-__Arguments__
-- `ndef` - `object` - this object should be obtained from nfc tag object with this form: `tag.ndefMessage[0]`. (NFC tag object can be obtained by `getLaunchTagEvent` or `registerTagEvent`)
-
-__Examples__
-```js
-let text = NdefParser.parseText(sampleTag.ndefMessage[0]);
-console.log('parsedText: ' + text);
-```
-
-## NFC Hardware requirement on Android
-
-By default react-native-android-library-boilerplate is set to not require NFC hardware on Android. This setting will overwrite what ever you put in your main AndroidManifest.xml file during `react-native link` phase.
-
-If you want to change this behavior to only have your app support NFC devices you have to override you app manifest manually.
-
-Current setting is:
-```<uses-feature android:name="android.hardware.nfc" android:required="false" />```
-
-If you want to only have your app support NFC devices then you have to change required to true.
-
-
-## Version history (from v0.1.0) 
-
-v0.6.0
-- integrate [`ndef-js`](https://github.com/don/ndef-js) to perform Ndef encoding & decoding. Great thanks for their brilliant work!
-- as a result of previous integration, users can now easily handle the NdefMessage consists of multi NdefRecords. 
-    - see `example/MultiNdefRecord.js` for a full example to write or read such an NdefMessage.
-
-v0.5.4
-- (android) support `getTag` for all NFC technologies
-- (android) update **compileSdkVersion** and **buildToolsVersion** to 26
-- (ios) bug fix: clear event subscription when reader session closed
-
-v0.5.2
-- support **Android Beam** via `setNdefPushMessage` API [Android only]
-    - please see `examples/App.js` for a concrete example
-- new methods for `NfcTech.Ndef` [Android only]
-    - supported methods: `makeReadOnly`
-- bug fix: guard against getCurrentActivity() returns null
-
-v0.5.1
-- support `NfcTech.NfcA` [Android only]:
-    - representing `android.nfc.tech.NfcA` [link](https://developer.android.com/reference/android/nfc/tech/NfcA)
-    - supported methods: `transceive`
-
-v0.5.0
-- support `NfcTech.Ndef` [Android only]:
-    - representing `android.nfc.tech.Ndef` [link](https://developer.android.com/reference/android/nfc/tech/Ndef)
-    - supported methods: `writeNdefMessage`, `getNdefMessage`, `getCachedNdefMessage`
-    - please see `examples/AndroidTechTestNdef.js` for a concrete example
-
-v0.4.0
-- support `NdefParser.parseText` for RTD_TEXT parsing 
-
-v0.3.2
-- change `isSupported` API to utilize `NFCNDEFReaderSession.readingAvailable` [iOS]
-- change minSdkVersion to 16 [Android]
-
-v0.3.0
-- add `onStateChanged` [Android] 
-- add options for `requestNdefWrite` to allow NDEF formating [Android]
-
-v0.2.0
-- add `requestNdefWrite` and `cancelNdefWrite` [Android] 
-
-v0.1.0
-- add `isNfcSupported` 
+    ```javascript
+    import Boilerplate from 'react-native-android-library-boilerplate'
+    Boilerplate.show('Boilerplate runs fine', Boilerplate.LONG)
+    ```
+5. You can test and develop your library by importing the `node_modules` library into **Android Studio** if you don't want to install it from _git_ all the time.
