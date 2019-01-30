@@ -45,8 +45,11 @@ import android.nfc.tech.MifareClassic;
 import android.nfc.tech.MifareUltralight;
 
 
+import android.widget.Toast;
+
+
 //*******************************
-//			/*
+			/*
 
 
 import android.support.annotation.NonNull;
@@ -75,7 +78,7 @@ import com.nxp.nfclib.utils.Utilities;
 import java.nio.charset.Charset;
 import java.util.Locale;
 
-//				*/
+				*/
 //*******************************
 
 
@@ -140,6 +143,15 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 	private boolean hasPendingRequest() {
 		return writeNdefRequest != null || techRequest != null; 
+	}
+
+
+	//----------- TOAST
+	@ReactMethod
+	public void show() {
+		String message = 'prova toast';
+		int duration = 1000
+		Toast.makeText(getReactApplicationContext(), message, duration).show();
 	}
 
 	@ReactMethod
