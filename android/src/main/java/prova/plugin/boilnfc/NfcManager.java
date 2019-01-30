@@ -47,6 +47,10 @@ import android.nfc.tech.MifareUltralight;
 
 import android.widget.Toast;
 
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContextBaseJavaModule;
+import com.facebook.react.bridge.ReactMethod;
+
 
 //*******************************
 			/*
@@ -151,7 +155,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	public void show() {
 		String message = "prova toast";
 		int duration = 1000;
-		// Toast.makeText(getReactApplicationContext(), message, duration).show();
+		//Toast.makeText(getReactApplicationContext(), message, duration).show();
 	}
 
 	@ReactMethod
