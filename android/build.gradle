@@ -43,7 +43,7 @@ android {
                 username "sdkuser"
                 password "taplinx"
             }
-            url "http://maven.taplinx.nxp.com/nexus/content/repositories/taplinx/"
+            url "http://maven.taplinx.nxp.com/nexus/content/repositories/taplinx/taplinx-android/nxpnfcandroidlib/1.5/nxpnfcandroidlib-1.5.aar"
         }
     }
 }
