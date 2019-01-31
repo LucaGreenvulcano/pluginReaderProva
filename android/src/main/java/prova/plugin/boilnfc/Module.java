@@ -10,7 +10,7 @@ import java.util.Map;
 
 
 //-------------------
-//      /*
+      /*
 
 
 import com.nxp.nfclib.CardType;
@@ -29,7 +29,7 @@ import com.nxp.nfclib.utils.NxpLogUtils;
 import com.nxp.nfclib.utils.Utilities;
 
 
-//      */
+      */
 //----------------------
 
 public class Module extends ReactContextBaseJavaModule {
