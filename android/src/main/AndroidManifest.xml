@@ -1,3 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="io.cmichel.boilerplate">
+          package="prova.plugin.boilnfc">
+
+    <uses-feature android:name="android.hardware.nfc" android:required="true"/>
+    <uses-permission android:name="android.permission.NFC" />
 </manifest>

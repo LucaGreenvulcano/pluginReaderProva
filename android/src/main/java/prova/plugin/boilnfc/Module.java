@@ -1,13 +1,47 @@
 package prova.plugin.boilnfc;
 
 import android.widget.Toast;
-
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-
 import java.util.HashMap;
 import java.util.Map;
+
+
+
+//-------------------
+//      /*
+
+import android.nfc.NdefRecord;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.MenuItem;
+import android.widget.TextView;
+import android.content.Intent;
+
+import com.nxp.nfclib.CardType;
+import com.nxp.nfclib.NxpNfcLib;
+import com.nxp.nfclib.desfire.DESFireFactory;
+import com.nxp.nfclib.desfire.IDESFireEV1;
+import com.nxp.nfclib.exceptions.NxpNfcLibException;
+import com.nxp.nfclib.ndef.IType2NdefSupport;
+import com.nxp.nfclib.ndef.NdefMessageWrapper;
+import com.nxp.nfclib.ndef.NdefRecordWrapper;
+import com.nxp.nfclib.ntag.INTag;
+import com.nxp.nfclib.ntag.INTag213215216;
+import com.nxp.nfclib.ntag.NTag213215216;
+import com.nxp.nfclib.ntag.NTagFactory;
+import com.nxp.nfclib.utils.NxpLogUtils;
+import com.nxp.nfclib.utils.Utilities;
+
+
+//      +/
+//----------------------
 
 public class Module extends ReactContextBaseJavaModule {
 
