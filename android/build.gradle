@@ -56,5 +56,5 @@ repositories {
 dependencies {
     compile fileTree(dir: 'libs', include:['*.jar'])
     compile 'com.facebook.react:react-native:+'
-    compile('taplinx-android:nxpnfcandroidlib:1.4@aar') { transitive = true }
+    compile('taplinx-android:nxpnfcandroidlib:1.5@aar') { transitive = true }
 }
