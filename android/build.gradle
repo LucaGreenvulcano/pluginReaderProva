@@ -35,26 +35,26 @@ android {
     }
 }
 
-repositories {
-
-    flatDir{
-        dirs 'libs'
-    }
-    mavenCentral()
-
-    maven {
-        credentials {
-            username "sdkuser"
-            password "taplinx"
+allprojects {
+    repositories {
+        flatDir {
+            dirs 'libs'
         }
-        url "http://maven.taplinx.nxp.com/nexus/content/repositories/taplinx/"
+        maven {
+            credentials {
+                username "sdkuser"
+                password "taplinx"
+            }
+            url "http://maven.taplinx.nxp.com/nexus/content/repositories/taplinx/"
+        }
+        mavenCentral()
+        google()
+        jcenter()
     }
-    google()
-    jcenter()
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include:['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.facebook.react:react-native:+'
     implementation('taplinx-android:nxpnfcandroidlib:1.4@aar') { transitive = true }
 }
