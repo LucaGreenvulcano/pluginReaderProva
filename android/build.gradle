@@ -46,7 +46,7 @@ allprojects {
                 password "taplinx"
             }
             url "\n" +
-                    "http://maven.taplinx.nxp.com/nexus/content/repositories/taplinxfiles/JavaDoc/androidjavadoc/1.5/androidjavadoc-1.5.pom"
+                    "http://maven.taplinx.nxp.com/nexus/content/repositories/taplinxfiles/"
         }
         mavenCentral()
         google()
@@ -57,5 +57,8 @@ allprojects {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.facebook.react:react-native:+'
-    implementation('taplinx-android:nxpnfcandroidlib:1.4@aar') { transitive = true }
+    implementation ('taplinx-android:nxpnfcandroidlib:1.5@aar'){
+        transitive = true
+        changing = true
+    }
 }
