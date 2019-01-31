@@ -13,7 +13,7 @@ buildscript {
     }
 
     dependencies {
-    classpath 'com.android.tools.build:gradle:2.2.1'
+        classpath 'com.android.tools.build:gradle:2.2.3'
     }
 }
 
@@ -33,19 +33,25 @@ android {
     lintOptions {
         abortOnError false
     }
+}
 
-    repositories {
-        flatDir {
-            dirs 'libs'
-        }
-        maven {
-            credentials {
-                username "sdkuser"
-                password "taplinx"
-            }
-            url "http://maven.taplinx.nxp.com/nexus/content/repositories/taplinx/taplinx-android/nxpnfcandroidlib/1.5/nxpnfcandroidlib-1.5.aar"
-        }
+
+repositories {
+    flatDir{
+        dirs 'libs'
     }
+
+    maven {
+        credentials{
+            username "sdkuser"
+            password "taplinx"
+        }
+
+        url "http://maven.taplinx.nxp.com/nexus/content/repositories/taplinx/"
+
+    }
+    mavenCentral()
+
 }
 
 
