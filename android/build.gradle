@@ -41,7 +41,7 @@ repositories {
         dirs 'libs'
     }
 
-    maven {
+    maven2 {
         credentials{
             username "sdkuser"
             password "taplinx"
