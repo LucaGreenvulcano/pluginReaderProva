@@ -1,17 +1,17 @@
 {
-  "name": "react-native-android-library-boilerplate",
+  "name": "react-native-nfc-protected-write",
   "version": "0.0.1",
-  "author": "Christoph Michel http://cmichel.io",
+  "author": "Davide Cascone",
   "private": false,
   "license": "Unlicense",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MrToph/react-native-android-library-boilerplate.git"
+    "url": "https://github.com/dvdcsc/react-native-nfc-protected-write.git"
   },
   "bugs": {
-    "url": "https://github.com/MrToph/react-native-android-library-boilerplate/issues"
+    "url": "https://github.com/dvdcsc/react-native-nfc-protected-write/issues"
   },
-  "homepage": "https://github.com/MrToph/react-native-android-library-boilerplate",
+  "homepage": "https://github.com/dvdcsc/react-native-nfc-protected-write",
   "keywords": [
     "react-native",
     "android",

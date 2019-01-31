@@ -13,7 +13,7 @@ buildscript {
     }
 
     dependencies {
-    classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:2.2.3'
     }
 }
 
@@ -35,30 +35,26 @@ android {
     }
 }
 
-allprojects {
-    repositories {
-        flatDir {
-            dirs 'libs'
-        }
-        maven {
-            credentials {
-                username "sdkuser"
-                password "taplinx"
-            }
-            url "\n" +
-                    "http://maven.taplinx.nxp.com/nexus/content/repositories/taplinxfiles/"
-        }
-        mavenCentral()
-        google()
-        jcenter()
+repositories {
+    flatDir{
+        dirs 'libs'
     }
+
+    maven {
+        credentials{
+            username "sdkuser"
+            password "taplinx"
+        }
+
+        url "http://maven.taplinx.nxp.com/nexus/content/repositories/taplinx/"
+
+    }
+    mavenCentral()
+
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.facebook.react:react-native:+'
-    implementation ('taplinx-android:nxpnfcandroidlib:1.5@aar'){
-        transitive = true
-        changing = true
-    }
+    compile fileTree(dir: 'libs', include:['*.jar'])
+    compile 'com.facebook.react:react-native:+'
+    compile('taplinx-android:nxpnfcandroidlib:1.4@aar') { transitive = true }
 }
