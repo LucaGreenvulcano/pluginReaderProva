@@ -57,7 +57,7 @@ allprojects {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.facebook.react:react-native:+'
-    implementation ('nxonfcandroidlib-1.5:nxpnfcandroidlib:1.5@aar'){
+    implementation ('nxpnfcandroidlib-1.5:nxpnfcandroidlib:1.5@aar'){
         transitive = true
         changing = true
     }
