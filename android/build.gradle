@@ -45,7 +45,8 @@ allprojects {
                 username "sdkuser"
                 password "taplinx"
             }
-            url "http://maven.taplinx.nxp.com/nexus/content/repositories/taplinx/"
+            url "\n" +
+                    "http://maven.taplinx.nxp.com/nexus/content/repositories/taplinxfiles/JavaDoc/androidjavadoc/1.5/androidjavadoc-1.5.pom"
         }
         mavenCentral()
         google()
