@@ -58,7 +58,7 @@ repositories {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.facebook.react:react-native:+'
-    implementation ('taplinx-android:nxpnfcandroidlib:1.2@aar'){
+    implementation ('taplinx-android:nxpnfcandroidlib:1.5@aar'){
         transitive = true
         changing = true
     }
