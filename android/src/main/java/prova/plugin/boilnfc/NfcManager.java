@@ -111,6 +111,20 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	//-----
 	private Intent ndefIntent = null;
 
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		initializeLibrary();                  // Initialize library
+	}
+
+	private void initializeLibrary()
+	{                                        // Initialize the TapLinx library
+		m_libInstance = NxpNfcLib.getInstance();
+		m_libInstance.registerActivity( this, TAPLINX_KEY );
+	}
+
 	class WriteNdefRequest {
 		NdefMessage message;
 		Callback callback;
