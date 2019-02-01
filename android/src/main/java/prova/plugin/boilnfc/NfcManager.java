@@ -53,7 +53,7 @@ import com.facebook.react.bridge.ReactMethod;
 
 
 //*******************************
-			/*
+
 
 
 import android.support.annotation.NonNull;
@@ -82,7 +82,7 @@ import com.nxp.nfclib.utils.Utilities;
 import java.nio.charset.Charset;
 import java.util.Locale;
 
-				*/
+
 //*******************************
 
 
