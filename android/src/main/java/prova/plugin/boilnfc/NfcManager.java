@@ -369,7 +369,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 
 		//***********************
-/*
+
 	private void writeNXP( final Intent intent )
 	{
 		try
@@ -382,7 +382,6 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 				Log.d( TAG, "Connecting...");
 				tag.getReader().connect();
-
 				Log.d( TAG, "Card Detected: "+tag.getType().getTagName()+"\n\n");
 
 				String msg = "123BRAND|BRAND CODE|MODEL|SIZE";
@@ -443,7 +442,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	public void writePassword(){
 		this.writeNXP(ndefIntent);
 	}
-*/
+
 	//***********************
 
 	@ReactMethod
