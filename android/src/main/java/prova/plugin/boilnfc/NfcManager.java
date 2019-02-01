@@ -111,11 +111,6 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	//-----
 	private Intent ndefIntent = null;
 
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		initializeLibrary();                  // Initialize library
-	}
-
 	private void initializeLibrary()
 	{                                        // Initialize the TapLinx library
 		m_libInstance = NxpNfcLib.getInstance();
@@ -143,7 +138,8 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
         reactContext.addActivityEventListener(this);
 		reactContext.addLifecycleEventListener(this);
         Log.d(LOG_TAG, "NfcManager created");
-    }
+		initializeLibrary();
+	}
 
 	@Override
 	public String getName() {
