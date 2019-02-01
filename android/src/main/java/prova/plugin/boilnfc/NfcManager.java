@@ -86,7 +86,6 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	// private String TAG = MainActivity.class.getSimpleName();
 	private String TAG = NfcManager.class.getSimpleName();
 	private NxpNfcLib m_libInstance = null;  // The TapLinX library instance
-	private TextView m_textView      = null;
 	private TextView mTextMessage;
 	private final String TAPLINX_KEY = "07698d782c5070246b1df1b1ed79adde";
 	//    private final byte[] pwd = new byte[]{0x01, 0x02, 0x03, 0x04};
