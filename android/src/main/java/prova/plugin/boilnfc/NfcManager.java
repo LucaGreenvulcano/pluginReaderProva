@@ -111,7 +111,8 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	//-----
 	private Intent ndefIntent = null;
 
-	protected void onCreate() {
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		initializeLibrary();                  // Initialize library
 	}
 
