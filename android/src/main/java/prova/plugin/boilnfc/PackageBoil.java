@@ -1,3 +1,4 @@
+
 package prova.plugin.boilnfc;
 
 import com.facebook.react.ReactPackage;
@@ -12,23 +13,23 @@ import java.util.List;
 
 public class PackageBoil implements ReactPackage {
 
-    // @Override
-    public List<Class<? extends JavaScriptModule>> createJSModules() {
-        return Collections.emptyList();
+    public PackageBoil() {
     }
 
     @Override
-    public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        return Collections.emptyList();
-    }
-
-    @Override
-    public List<NativeModule> createNativeModules(
-            ReactApplicationContext reactContext) {
+    public List<NativeModule> createNativeModules(ReactApplicationContext reactApplicationContext) {
         List<NativeModule> modules = new ArrayList<>();
 
-        modules.add(new Module(reactContext));
-
+        modules.add(new NfcManager(reactApplicationContext));
         return modules;
+    }
+
+    public List<Class<? extends JavaScriptModule>> createJSModules() {
+        return new ArrayList<>();
+    }
+
+    @Override
+    public List<ViewManager> createViewManagers(ReactApplicationContext reactApplicationContext) {
+        return Collections.emptyList();
     }
 }
