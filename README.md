@@ -69,3 +69,5 @@ There are many ways to do this, here's the way I do it:
     Boilerplate.show('Boilerplate runs fine', Boilerplate.LONG)
     ```
 5. You can test and develop your library by importing the `node_modules` library into **Android Studio** if you don't want to install it from _git_ all the time.
+
+6 /Users/lucacorcione/Documents/React_GV/DC/produzione/dcsp-app-produzione/node_modules/react-native/android/taplinx-android/nxpnfcandroidlib/1.5/nxpnfcandroidlib-1.5.aar
