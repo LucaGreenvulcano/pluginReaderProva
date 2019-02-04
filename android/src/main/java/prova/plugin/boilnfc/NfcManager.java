@@ -380,7 +380,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 
 		//***********************
-
+	@ReactMethod
 	private void writeNXP( final Intent intent )
 	{
 		try
@@ -926,5 +926,19 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		}
         return value;
     }
+
+
+	public NdefRecordWrapper createTextRecord(String payload, Locale locale, boolean encodeInUtf8) {
+		byte[] langBytes = locale.getLanguage().getBytes(Charset.forName(UTF_8));
+		Charset utfEncoding = encodeInUtf8 ? Charset.forName(UTF_8) : Charset.forName("UTF-16");
+		byte[] textBytes = payload.getBytes(utfEncoding);
+		int utfBit = encodeInUtf8 ? 0 : (1 << 7);
+		char status = (char) (utfBit + langBytes.length);
+		byte[] data = new byte[1 + langBytes.length + textBytes.length];
+		data[0] = (byte) status;
+		System.arraycopy(langBytes, 0, data, 1, langBytes.length);
+		System.arraycopy(textBytes, 0, data, 1 + langBytes.length, textBytes.length);
+		return new NdefRecordWrapper(NdefRecord.TNF_WELL_KNOWN, NdefRecord.RTD_TEXT, new byte[0], data);
+	}
 }
 
