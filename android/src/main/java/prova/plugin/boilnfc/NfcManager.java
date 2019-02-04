@@ -142,7 +142,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
         reactContext.addActivityEventListener(this);
 		reactContext.addLifecycleEventListener(this);
         Log.d(LOG_TAG, "NfcManager created");
-		initializeLibrary();
+		// initializeLibrary();
 	}
 
 	@Override
@@ -450,15 +450,43 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 
 	@ReactMethod
-	public void writePassword(){
-		this.writeNXP(ndefIntent);
+	public void writePassword(Intent intent){
+		this.writeNXP(intent);
+		//this.writeNXP(ndefIntent);
 	}
 
 	//***********************
 
 	@ReactMethod
+	public void start(Callback callback) {
+		/*
+		NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(context);
+		if (nfcAdapter != null) {
+			Log.d(LOG_TAG, "start");
+
+			IntentFilter filter = new IntentFilter(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED);
+			Activity currentActivity = getCurrentActivity();
+		    if (currentActivity == null) {
+		    	callback.invoke("fail to get current activity");
+		    	return;
+		    }
+
+			currentActivity.registerReceiver(mReceiver, filter);
+			callback.invoke();
+		} else {
+			Log.d(LOG_TAG, "not support in this device");
+			callback.invoke("no nfc support");
+		}
+		*/
+		initializeLibrary();
+	}
+
+	/*
+
+
+	@ReactMethod
 	public void requestNdefProtectWrite(ReadableArray rnArray, ReadableArray password, ReadableMap options, Callback callback ) {
-	
+
 		synchronized(this) {
 			if (!isForegroundEnabled) {
 				callback.invoke("you should requestTagEvent first");
@@ -470,7 +498,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		    } else {
 				boolean format = options.getBoolean("format");
 				boolean formatReadOnly = options.getBoolean("formatReadOnly");
-				
+
 		        try {
 					NdefMessage msgToWrite;
 
@@ -486,10 +514,10 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 		    		writeNdefRequest = new WriteNdefRequest(
 						msgToWrite,
-						callback, // defer the callback 
+						callback, // defer the callback
 						format,
 						formatReadOnly
-					); 
+					);
 		        } catch (FormatException e) {
 		        	callback.invoke("Incorrect ndef format");
 		        }
@@ -511,7 +539,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 					NdefMessage msgToPush = null;
 					if (rnArray != null) {
 						msgToPush = new NdefMessage(rnArrayToBytes(rnArray));
-					}	
+					}
 
 					NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(context);
 					nfcAdapter.setNdefPushMessage(msgToPush, currentActivity);
@@ -526,27 +554,10 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		}
 	}
 
-	@ReactMethod
-	public void start(Callback callback) {
-		NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(context);
-		if (nfcAdapter != null) {
-			Log.d(LOG_TAG, "start");
 
-			IntentFilter filter = new IntentFilter(NfcAdapter.ACTION_ADAPTER_STATE_CHANGED);
-			Activity currentActivity = getCurrentActivity();
-		    if (currentActivity == null) {
-		    	callback.invoke("fail to get current activity");
-		    	return;
-		    }
 
-			currentActivity.registerReceiver(mReceiver, filter);
-			callback.invoke();
-		} else {
-			Log.d(LOG_TAG, "not support in this device");
-			callback.invoke("no nfc support");
-		}
-	}
-    
+
+
    	@ReactMethod
 	public void isSupported(Callback callback){
 		Log.d(LOG_TAG, "isSupported");
@@ -927,6 +938,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
         return value;
     }
 
+*/
 
 	public NdefRecordWrapper createTextRecord(String payload, Locale locale, boolean encodeInUtf8) {
 		byte[] langBytes = locale.getLanguage().getBytes(Charset.forName(UTF_8));
