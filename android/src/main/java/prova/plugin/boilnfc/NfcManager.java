@@ -115,8 +115,8 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	{                                        // Initialize the TapLinx library
 		m_libInstance = NxpNfcLib.getInstance();
 		// m_libInstance.registerActivity( this.context, TAPLINX_KEY );
-		nxpLib.registerActivity(getCurrentActivity(), nxpLibKey);
-		nxpLib.startForeGroundDispatch();
+		m_libInstance.registerActivity(getCurrentActivity(), TAPLINX_KEY);
+		m_libInstance.startForeGroundDispatch();
 		this.show("inizializzato", 1000);
 
 	}
