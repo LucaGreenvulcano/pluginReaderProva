@@ -114,7 +114,11 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	private void initializeLibrary()
 	{                                        // Initialize the TapLinx library
 		m_libInstance = NxpNfcLib.getInstance();
-		m_libInstance.registerActivity( this.context, TAPLINX_KEY );
+		// m_libInstance.registerActivity( this.context, TAPLINX_KEY );
+		nxpLib.registerActivity(getCurrentActivity(), nxpLibKey);
+		nxpLib.startForeGroundDispatch();
+		this.show("inizializzato", 1000);
+
 	}
 
 	class WriteNdefRequest {
@@ -153,10 +157,10 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 	//----------- TOAST
 	@ReactMethod
-	public void show() {
-		String message = "prova toast";
-		int duration = 1000;
-//		Toast.makeText(getReactApplicationContext(), message, duration).show();
+	public void show(String message, int duration) {
+//		String message = "prova toast";
+//		int duration = 1000;
+		Toast.makeText(getReactApplicationContext(), message, duration).show();
 	}
 
 	@ReactMethod
