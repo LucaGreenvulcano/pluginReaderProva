@@ -619,7 +619,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		ndefIntent = currentActivity.getIntent();
 
 		try {
-			ndef.addDataType("*/*");
+			ndef.addDataType("* /*");
 		} catch (MalformedMimeTypeException e) {
 			throw new RuntimeException("fail", e);
 	    }
