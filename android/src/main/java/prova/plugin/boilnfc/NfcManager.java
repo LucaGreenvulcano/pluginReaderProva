@@ -922,6 +922,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		}
 	}
 
+*/
 	private byte[] rnArrayToBytes(ReadableArray rArray) {
 		byte[] bytes = new byte[rArray.size()];
 		for (int i = 0; i < rArray.size(); i++) {
@@ -938,7 +939,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
         return value;
     }
 
-*/
+
 	private WritableMap tag2React(Tag tag) {
 		try {
 			JSONObject json = Util.tagToJSON(tag);
