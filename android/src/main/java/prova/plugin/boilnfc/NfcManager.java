@@ -939,6 +939,14 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
     }
 
 */
+	private WritableMap tag2React(Tag tag) {
+		try {
+			JSONObject json = Util.tagToJSON(tag);
+			return JsonConvert.jsonToReact(json);
+		} catch (JSONException ex) {
+			return null;
+		}
+	}
 
 	public NdefRecordWrapper createTextRecord(String payload, Locale locale, boolean encodeInUtf8) {
 		byte[] langBytes = locale.getLanguage().getBytes(Charset.forName(UTF_8));
