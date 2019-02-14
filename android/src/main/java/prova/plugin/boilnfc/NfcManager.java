@@ -848,32 +848,6 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		}
     }
 
-    JSONObject buildNdefJSON(Ndef ndef, Parcelable[] messages) {
-        JSONObject json = Util.ndefToJSON(ndef);
-
-        // ndef is null for peer-to-peer
-        // ndef and messages are null for ndef format-able
-        if (ndef == null && messages != null) {
-            try {
-
-                if (messages.length > 0) {
-                    NdefMessage message = (NdefMessage) messages[0];
-                    json.put("ndefMessage", Util.messageToJSON(message));
-                    // guessing type, would prefer a more definitive way to determine type
-                    json.put("type", "NDEF Push Protocol");
-                }
-
-                if (messages.length > 1) {
-                    Log.d(LOG_TAG, "Expected one ndefMessage but found " + messages.length);
-                }
-
-            } catch (JSONException e) {
-                // shouldn't happen
-                Log.e(Util.TAG, "Failed to convert ndefMessage into json", e);
-            }
-        }
-        return json;
-    }
 
 	private void writeNdef(Tag tag, WriteNdefRequest request) {
 		NdefMessage message = request.message; 
@@ -923,6 +897,34 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	}
 
 */
+
+	JSONObject buildNdefJSON(Ndef ndef, Parcelable[] messages) {
+		JSONObject json = Util.ndefToJSON(ndef);
+
+		// ndef is null for peer-to-peer
+		// ndef and messages are null for ndef format-able
+		if (ndef == null && messages != null) {
+			try {
+
+				if (messages.length > 0) {
+					NdefMessage message = (NdefMessage) messages[0];
+					json.put("ndefMessage", Util.messageToJSON(message));
+					// guessing type, would prefer a more definitive way to determine type
+					json.put("type", "NDEF Push Protocol");
+				}
+
+				if (messages.length > 1) {
+					Log.d(LOG_TAG, "Expected one ndefMessage but found " + messages.length);
+				}
+
+			} catch (JSONException e) {
+				// shouldn't happen
+				Log.e(Util.TAG, "Failed to convert ndefMessage into json", e);
+			}
+		}
+		return json;
+	}
+
 
 	private WritableMap ndef2React(Ndef ndef, Parcelable[] messages) {
 		try {
