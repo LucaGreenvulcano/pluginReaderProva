@@ -937,14 +937,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	}
 
 
-	private WritableMap ndef2React(Ndef ndef, Parcelable[] messages) {
-		try {
-			JSONObject json = buildNdefJSON(ndef, messages);
-			return JsonConvert.jsonToReact(json);
-		} catch (JSONException ex) {
-			return null;
-		}
-	}
+
 
 	private byte[] rnArrayToBytes(ReadableArray rArray) {
 		byte[] bytes = new byte[rArray.size()];
@@ -961,16 +954,6 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		}
         return value;
     }
-
-
-	private WritableMap tag2React(Tag tag) {
-		try {
-			JSONObject json = Util.tagToJSON(tag);
-			return JsonConvert.jsonToReact(json);
-		} catch (JSONException ex) {
-			return null;
-		}
-	}
 
 	public NdefRecordWrapper createTextRecord(String payload, Locale locale, boolean encodeInUtf8) {
 		byte[] langBytes = locale.getLanguage().getBytes(Charset.forName(UTF_8));
