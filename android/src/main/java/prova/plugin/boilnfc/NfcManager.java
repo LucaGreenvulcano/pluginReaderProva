@@ -705,6 +705,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
     private String[][] getTechLists() {
         return techLists.toArray(new String[0][0]);
     }
+*/
 
 	private void sendEvent(String eventName,
 						   @Nullable WritableMap params) {
@@ -712,6 +713,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 				.getJSModule(RCTNativeAppEventEmitter.class)
 				.emit(eventName, params);
 	}
+
 
 	private void sendEventWithJson(String eventName,
 						  JSONObject json) {
@@ -722,6 +724,8 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 			Log.d(LOG_TAG, "fireNdefEvent fail: " + ex);
 		}
 	}
+
+/*
 
 	private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
 		@Override
