@@ -859,7 +859,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		}
     }
 
-
+*/
 	private void writeNdef(Tag tag, WriteNdefRequest request) {
 		NdefMessage message = request.message; 
 		Callback callback = request.callback;
@@ -907,7 +907,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		}
 	}
 
-*/
+
 
 	JSONObject buildNdefJSON(Ndef ndef, Parcelable[] messages) {
 		JSONObject json = Util.ndefToJSON(ndef);
