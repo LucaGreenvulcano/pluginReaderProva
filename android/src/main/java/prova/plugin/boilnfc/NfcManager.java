@@ -462,7 +462,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 	@ReactMethod
 	public void start(Callback callback) {
-/*
+
 		NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(context);
 		if (nfcAdapter != null) {
 			Log.d(LOG_TAG, "start");
@@ -480,11 +480,11 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 			Log.d(LOG_TAG, "not support in this device");
 			callback.invoke("no nfc support");
 		}
-*/
+
 		initializeLibrary();
 	}
 
-	/*
+
 
 
 	@ReactMethod
@@ -725,7 +725,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		}
 	}
 
-/*
+
 
 	private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
 		@Override
@@ -768,7 +768,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		Log.d(LOG_TAG, "onActivityResult");
 	}
 
-*/
+
 
 	@Override
 	public void onNewIntent(Intent intent) {
@@ -840,7 +840,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		return parsed;
 	}
 
-/*
+
 	private WritableMap tag2React(Tag tag) {
 		try {
 			JSONObject json = Util.tagToJSON(tag);
@@ -859,7 +859,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		}
     }
 
-*/
+
 	private void writeNdef(Tag tag, WriteNdefRequest request) {
 		NdefMessage message = request.message; 
 		Callback callback = request.callback;
