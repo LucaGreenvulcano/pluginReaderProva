@@ -779,7 +779,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		}
 	}
 
-	/*
+
 	private WritableMap parseNfcIntent(Intent intent) {
 		Log.d(LOG_TAG, "parseIntent " + intent);
 		String action = intent.getAction();
@@ -840,6 +840,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		return parsed;
 	}
 
+/*
 	private WritableMap tag2React(Tag tag) {
 		try {
 			JSONObject json = Util.tagToJSON(tag);
