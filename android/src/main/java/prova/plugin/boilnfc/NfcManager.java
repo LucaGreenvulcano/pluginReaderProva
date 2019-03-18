@@ -466,7 +466,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 	@ReactMethod
 	public void writePassword(Intent intent){
-		this.writeNXP(intent);
+		// this.writeNXP(intent);
 		//this.writeNXP(ndefIntent);
 	}
 
