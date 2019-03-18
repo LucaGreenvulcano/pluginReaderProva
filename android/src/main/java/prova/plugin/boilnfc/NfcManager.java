@@ -362,7 +362,6 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 						byte[] bytes = rnArrayToBytes(rnArray);
 						msgToWrite = new NdefMessage(bytes);
 					}
-
 		    		writeNdefRequest = new WriteNdefRequest(
 						msgToWrite,
 						callback, // defer the callback 
@@ -381,6 +380,8 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	@ReactMethod
 	private void writeNXP(Tag tag, WriteNdefRequest request)
 	{
+		NTag213215216 tag_1 = (NTag213215216)NTagFactory.getInstance().getNTAG213( m_libInstance.getCustomModules() );
+
 		NdefMessage message = request.message;
 		Callback callback = request.callback;
 		boolean formatReadOnly = request.formatReadOnly;
