@@ -379,10 +379,11 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 	//***********************
 	@ReactMethod
-	private void writeNXP( /*final Intent intent */ )
+	private void writeNXP()
 	{
 		try
 		{
+			this.show("prova", 100);
 		//	CardType cardType = m_libInstance.getCardType( intent );
 		//	if( CardType.NTag213 == cardType )
 		//	{
