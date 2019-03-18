@@ -420,9 +420,11 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 					callback.invoke("tag size is not enough");
 				} else {
 					Log.d(LOG_TAG, "ready to writeNdef, seriously");
-					//tag_1.getReader().connect();
-					ndef.connect();
-					ndef.writeNdefMessage(message);
+					tag_1.getReader().connect();
+					tag_1.writeNdef(message);
+					//tag_1.getReader().close();
+				//	ndef.connect();
+			//		ndef.writeNdefMessage(message);
 					callback.invoke();
 				}
 			} catch (Exception ex) {
