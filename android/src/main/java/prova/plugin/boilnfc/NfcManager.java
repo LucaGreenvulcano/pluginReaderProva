@@ -491,14 +491,14 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 					tag.getReader().close();
 					Log.d( TAG, "DONE!");
 
-				/*	byte[] aArr = new byte[]{0x01, 0x02, 0x03, 0x04};
+					byte[] aArr = new byte[]{0x01, 0x02, 0x03, 0x04};
 					String a = new String(aArr);
 					Log.d( TAG, "a: "+a);
 
 					byte[] bArr = new byte[]{0x31, 0x32, 0x33, 0x34};
 					String b = new String(bArr);
 					Log.d( TAG, "b: "+b);
-				*/
+
 
 //                    NxpLogUtils.save();
 				} catch (Exception e) {
