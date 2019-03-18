@@ -379,13 +379,13 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 	//***********************
 	@ReactMethod
-	private void writeNXP( final Intent intent )
+	private void writeNXP( /*final Intent intent */ )
 	{
 		try
 		{
-			CardType cardType = m_libInstance.getCardType( intent );
-			if( CardType.NTag213 == cardType )
-			{
+		//	CardType cardType = m_libInstance.getCardType( intent );
+		//	if( CardType.NTag213 == cardType )
+		//	{
 				NTag213215216 tag = (NTag213215216)NTagFactory.getInstance().getNTAG213( m_libInstance.getCustomModules() );
 				Log.d( TAG, "Connecting...");
 				tag.getReader().connect();
@@ -432,8 +432,6 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 						Log.d( TAG, "DONE!");
 					}
 
-
-
 					Log.d( TAG, "Protecting...");
 					tag.setMemProtectionAndPwdVerificationForReadWriteAccess((byte)tag.getFirstUserpage(), false);
 //
@@ -457,7 +455,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 					Log.d( TAG, e.getMessage());
 //                    NxpLogUtils.save();
 				}
-			}
+		//	}
 		}
 		catch( Throwable t )
 		{
