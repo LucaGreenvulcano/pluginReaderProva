@@ -55,8 +55,6 @@ import com.facebook.react.bridge.ReactMethod;
 //*******************************
 
 
-
-
 import com.nxp.nfclib.CardType;
 import com.nxp.nfclib.NxpNfcLib;
 import com.nxp.nfclib.desfire.DESFireFactory;
@@ -379,18 +377,16 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	}
 
 
-		//***********************
+	//***********************
 	@ReactMethod
 	private void writeNXP( final Intent intent )
 	{
 		try
 		{
 			CardType cardType = m_libInstance.getCardType( intent );
-
 			if( CardType.NTag213 == cardType )
 			{
 				NTag213215216 tag = (NTag213215216)NTagFactory.getInstance().getNTAG213( m_libInstance.getCustomModules() );
-
 				Log.d( TAG, "Connecting...");
 				tag.getReader().connect();
 				Log.d( TAG, "Card Detected: "+tag.getType().getTagName()+"\n\n");
@@ -435,6 +431,27 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 						tag.getReader().close();
 						Log.d( TAG, "DONE!");
 					}
+
+
+
+					Log.d( TAG, "Protecting...");
+					tag.setMemProtectionAndPwdVerificationForReadWriteAccess((byte)tag.getFirstUserpage(), false);
+//
+					Log.d( TAG, "setting Pwd and Pack...");
+					tag.programPWDPack(pwd, pack);
+
+					tag.getReader().close();
+					Log.d( TAG, "DONE!");
+
+					byte[] aArr = new byte[]{0x01, 0x02, 0x03, 0x04};
+					String a = new String(aArr);
+					Log.d( TAG, "a: "+a);
+
+					byte[] bArr = new byte[]{0x31, 0x32, 0x33, 0x34};
+					String b = new String(bArr);
+					Log.d( TAG, "b: "+b);
+
+
 //                    NxpLogUtils.save();
 				} catch (Exception e) {
 					Log.d( TAG, e.getMessage());
