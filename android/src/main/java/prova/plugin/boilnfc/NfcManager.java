@@ -379,13 +379,62 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 	//***********************
 	@ReactMethod
-	public void writeNXP()
+	private void writeNXP(Tag tag, WriteNdefRequest request)
 	{
+		NdefMessage message = request.message;
+		Callback callback = request.callback;
+		boolean formatReadOnly = request.formatReadOnly;
+		boolean format = request.format;
+
+		if (format || formatReadOnly) {
+			try {
+				Log.d(LOG_TAG, "ready to writeNdef");
+				NdefFormatable formatable = NdefFormatable.get(tag);
+				if (formatable == null) {
+					callback.invoke("fail to apply ndef formatable tech");
+				} else {
+					Log.d(LOG_TAG, "ready to format ndef, seriously");
+					formatable.connect();
+					if (formatReadOnly) {
+						formatable.formatReadOnly(message);
+					} else {
+						formatable.format(message);
+					}
+					callback.invoke();
+				}
+			} catch (Exception ex) {
+				callback.invoke(ex.getMessage());
+			}
+		} else {
+			try {
+				Log.d(LOG_TAG, "ready to writeNdef");
+				Ndef ndef = Ndef.get(tag);
+				if (ndef == null) {
+					callback.invoke("fail to apply ndef tech");
+				} else if (!ndef.isWritable()) {
+					callback.invoke("tag is not writeable");
+				} else if (ndef.getMaxSize() < message.toByteArray().length) {
+					callback.invoke("tag size is not enough");
+				} else {
+					Log.d(LOG_TAG, "ready to writeNdef, seriously");
+					ndef.connect();
+					ndef.writeNdefMessage(message);
+					callback.invoke();
+				}
+			} catch (Exception ex) {
+				callback.invoke(ex.getMessage());
+			}
+		}
+
+
+		/*
 		try
 		{
 		//	CardType cardType = m_libInstance.getCardType( intent );
 		//	if( CardType.NTag213 == cardType )
 		//	{
+
+
 				NTag213215216 tag = (NTag213215216)NTagFactory.getInstance().getNTAG213( m_libInstance.getCustomModules() );
 				Log.d( TAG, "Connecting...");
 				tag.getReader().connect();
@@ -412,7 +461,8 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 							Log.d( TAG, "tag cleared");
 
 							Log.d( TAG, "Writing "+msg);
-							tag.writeNDEF(ndefMW);
+							tag.writeNDEF(tag1, request);
+							//tag.writeNDEF(ndefMW);
 
 							tag.getReader().close();
 							Log.d( TAG, "DONE!");
@@ -441,14 +491,14 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 					tag.getReader().close();
 					Log.d( TAG, "DONE!");
 
-					byte[] aArr = new byte[]{0x01, 0x02, 0x03, 0x04};
+				/*	byte[] aArr = new byte[]{0x01, 0x02, 0x03, 0x04};
 					String a = new String(aArr);
 					Log.d( TAG, "a: "+a);
 
 					byte[] bArr = new byte[]{0x31, 0x32, 0x33, 0x34};
 					String b = new String(bArr);
 					Log.d( TAG, "b: "+b);
-
+				*/
 
 //                    NxpLogUtils.save();
 				} catch (Exception e) {
@@ -460,7 +510,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		catch( Throwable t )
 		{
 			t.printStackTrace();
-		}
+		}*/
 	}
 
 
@@ -809,7 +859,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 		synchronized(this) {
 			if (writeNdefRequest != null) {
-				writeNdef(
+				writeNXP( //writeNdef(
 					tag, 
 					writeNdefRequest
 				);
