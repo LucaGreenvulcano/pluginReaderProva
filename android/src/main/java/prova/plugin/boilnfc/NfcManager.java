@@ -382,11 +382,12 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	{
 		NTag213215216 tag_1 = (NTag213215216)NTagFactory.getInstance().getNTAG213( m_libInstance.getCustomModules() );
 
+
 		NdefMessage message = request.message;
 		Callback callback = request.callback;
 		boolean formatReadOnly = request.formatReadOnly;
 		boolean format = request.format;
-
+/*
 		if (format || formatReadOnly) {
 			try {
 				Log.d(LOG_TAG, "ready to writeNdef");
@@ -406,7 +407,8 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 			} catch (Exception ex) {
 				callback.invoke(ex.getMessage());
 			}
-		} else {
+		} else {*/
+
 			try {
 				Log.d(LOG_TAG, "ready to writeNdef");
 				Ndef ndef = Ndef.get(tag);
@@ -418,6 +420,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 					callback.invoke("tag size is not enough");
 				} else {
 					Log.d(LOG_TAG, "ready to writeNdef, seriously");
+					//tag_1.getReader().connect();
 					ndef.connect();
 					ndef.writeNdefMessage(message);
 					callback.invoke();
@@ -425,7 +428,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 			} catch (Exception ex) {
 				callback.invoke(ex.getMessage());
 			}
-		}
+	//	}
 
 
 		/*
