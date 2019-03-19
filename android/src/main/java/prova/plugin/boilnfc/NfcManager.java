@@ -378,8 +378,9 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 	//***********************
 	@ReactMethod
-	private void writeNXP(Tag tag, WriteNdefRequest request)
+	private void writeNXP(final Intent intent)
 	{
+		/*
 		NTag213215216 tag_1 = (NTag213215216)NTagFactory.getInstance().getNTAG213( m_libInstance.getCustomModules() );
 
 
@@ -391,7 +392,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		Callback callback = request.callback;
 		boolean formatReadOnly = request.formatReadOnly;
 		boolean format = request.format;
-/*
+//
 		if (format || formatReadOnly) {
 			try {
 				Log.d(LOG_TAG, "ready to writeNdef");
@@ -411,10 +412,10 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 			} catch (Exception ex) {
 				callback.invoke(ex.getMessage());
 			}
-		} else {*/
-
+		} else {
+//
 			try {
-				/*Log.d(LOG_TAG, "ready to writeNdef");
+				//Log.d(LOG_TAG, "ready to writeNdef");
 				Ndef ndef = Ndef.get(tag);
 				if (ndef == null) {
 					callback.invoke("fail to apply ndef tech");
@@ -430,7 +431,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 				//	ndef.connect();
 			//		ndef.writeNdefMessage(message);
 					callback.invoke();
-				}*/
+				//}
 				Log.d(LOG_TAG, "ready to writeNdef, seriously");
 				tag_1.getReader().connect();
 				tag_1.writeNDEF(ndefMW);
@@ -438,33 +439,30 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 			} catch (Exception ex) {
 				callback.invoke(ex.getMessage());
-			}
+			}*/
 	//	}
 
 
-		/*
+
 		try
 		{
 		//	CardType cardType = m_libInstance.getCardType( intent );
 		//	if( CardType.NTag213 == cardType )
 		//	{
 
-
 				NTag213215216 tag = (NTag213215216)NTagFactory.getInstance().getNTAG213( m_libInstance.getCustomModules() );
-				Log.d( TAG, "Connecting...");
 				tag.getReader().connect();
-				Log.d( TAG, "Card Detected: "+tag.getType().getTagName()+"\n\n");
-
 				String msg = "123BRAND|BRAND CODE|MODEL|SIZE";
 				NdefMessageWrapper ndefMW = new NdefMessageWrapper(createTextRecord(msg, Locale.ITALY, true));
 
 				try {
-					Log.d( TAG, "FirstUserpage: "+tag.getFirstUserpage());
-					Log.d( TAG, "LastUserPage: "+tag.getLastUserPage());
 
-					Log.d( TAG, "FirstPageLocked? : "+tag.isPageLocked(tag.getFirstUserpage()));
-					Log.d( TAG, "LastPageLocked? : "+tag.isPageLocked(tag.getLastUserPage()));
+				//	tag.clear();
+					tag.writeNDEF(ndefMW);
+					tag.getReader().close();
 
+
+/*
 					if(tag.isPageLocked(tag.getFirstUserpage())){
 						Log.d( TAG, "Authenticating...");
 						tag.authenticatePwd(pwd, pack);
@@ -476,8 +474,8 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 							Log.d( TAG, "tag cleared");
 
 							Log.d( TAG, "Writing "+msg);
-							tag.writeNDEF(tag1, request);
-							//tag.writeNDEF(ndefMW);
+							//tag.writeNDEF(tag1, request);
+							tag.writeNDEF(ndefMW);
 
 							tag.getReader().close();
 							Log.d( TAG, "DONE!");
@@ -485,6 +483,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 						else{
 							Log.d( TAG, "NOT Authenticated!!!!");
 						}
+
 					}
 					else{
 						tag.clear();
@@ -499,7 +498,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 					Log.d( TAG, "Protecting...");
 					tag.setMemProtectionAndPwdVerificationForReadWriteAccess((byte)tag.getFirstUserpage(), false);
-//
+/
 					Log.d( TAG, "setting Pwd and Pack...");
 					tag.programPWDPack(pwd, pack);
 
@@ -514,7 +513,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 					String b = new String(bArr);
 					Log.d( TAG, "b: "+b);
 
-
+*/
 //                    NxpLogUtils.save();
 				} catch (Exception e) {
 					Log.d( TAG, e.getMessage());
@@ -525,7 +524,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		catch( Throwable t )
 		{
 			t.printStackTrace();
-		}*/
+		}
 	}
 
 
@@ -852,11 +851,13 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 	@Override
 	public void onNewIntent(Intent intent) {
-        Log.d(LOG_TAG, "onNewIntent " + intent);
+       /* Log.d(LOG_TAG, "onNewIntent " + intent);
 		WritableMap nfcTag = parseNfcIntent(intent);
 		if (nfcTag != null) {
 			sendEvent("NfcManagerDiscoverTag", nfcTag);
-		}
+		}*/
+       writeNXP(intent);
+       super.onNewIntent(intent);
 	}
 
 
