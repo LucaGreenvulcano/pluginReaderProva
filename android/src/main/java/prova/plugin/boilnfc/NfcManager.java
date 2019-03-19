@@ -384,7 +384,8 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 
 		NdefMessage message = request.message;
-		NdefMessageWrapper ndefMW = new NdefMessageWrapper(createTextRecord(message, Locale.ITALY, true));
+		String msg = request.message;
+		NdefMessageWrapper ndefMW = new NdefMessageWrapper(createTextRecord(msg, Locale.ITALY, true));
 
 		Callback callback = request.callback;
 		boolean formatReadOnly = request.formatReadOnly;
@@ -412,7 +413,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		} else {*/
 
 			try {
-				Log.d(LOG_TAG, "ready to writeNdef");
+				/*Log.d(LOG_TAG, "ready to writeNdef");
 				Ndef ndef = Ndef.get(tag);
 				if (ndef == null) {
 					callback.invoke("fail to apply ndef tech");
@@ -428,7 +429,12 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 				//	ndef.connect();
 			//		ndef.writeNdefMessage(message);
 					callback.invoke();
-				}
+				}*/
+				Log.d(LOG_TAG, "ready to writeNdef, seriously");
+				tag_1.getReader().connect();
+				tag_1.writeNDEF(ndefMW);
+				callback.invoke();
+
 			} catch (Exception ex) {
 				callback.invoke(ex.getMessage());
 			}
