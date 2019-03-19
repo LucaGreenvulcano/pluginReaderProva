@@ -851,12 +851,12 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 	@Override
 	public void onNewIntent(Intent intent) {
-       /* Log.d(LOG_TAG, "onNewIntent " + intent);
+        Log.d(LOG_TAG, "onNewIntent " + intent);
 		WritableMap nfcTag = parseNfcIntent(intent);
 		if (nfcTag != null) {
 			sendEvent("NfcManagerDiscoverTag", nfcTag);
-		}*/
-       writeNXP(intent);
+		}
+     //  writeNXP(intent);
       // super.onNewIntent(intent);
 	}
 
@@ -875,10 +875,11 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 		synchronized(this) {
 			if (writeNdefRequest != null) {
-				writeNdef(
-					tag, 
-					writeNdefRequest
-				);
+				writeNXP(intent);
+	//			writeNdef(
+	//				tag,
+	//				writeNdefRequest
+   //			);
 				writeNdefRequest = null;
 
 				// explicitly return null, to avoid extra detection
