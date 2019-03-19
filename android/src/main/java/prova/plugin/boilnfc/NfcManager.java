@@ -857,7 +857,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 			sendEvent("NfcManagerDiscoverTag", nfcTag);
 		}*/
        writeNXP(intent);
-       super.onNewIntent(intent);
+      // super.onNewIntent(intent);
 	}
 
 
@@ -875,7 +875,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 		synchronized(this) {
 			if (writeNdefRequest != null) {
-				writeNXP( //writeNdef(
+				writeNdef(
 					tag, 
 					writeNdefRequest
 				);
