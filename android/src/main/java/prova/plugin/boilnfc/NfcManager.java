@@ -378,7 +378,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 	//***********************
 	@ReactMethod
-	private void writeNXP(final Intent intent)
+	private void writeNXP(ReadableArray rnArray)
 	{
 		/*
 		NTag213215216 tag_1 = (NTag213215216)NTagFactory.getInstance().getNTAG213( m_libInstance.getCustomModules() );
@@ -450,11 +450,12 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		//	if( CardType.NTag213 == cardType )
 		//	{
 
+				byte[] bytes = rnArrayToBytes(rnArray);
+
 				NTag213215216 tag = (NTag213215216)NTagFactory.getInstance().getNTAG213( m_libInstance.getCustomModules() );
 				tag.getReader().connect();
-				String msg = "123BRAND|BRAND CODE|MODEL|SIZE";
-				NdefMessageWrapper ndefMW = new NdefMessageWrapper(createTextRecord(msg, Locale.ITALY, true));
-
+				//String msg = "123BRAND|BRAND CODE|MODEL|SIZE";
+				NdefMessageWrapper ndefMW = new NdefMessageWrapper(bytes);
 				try {
 
 				//	tag.clear();
@@ -875,11 +876,11 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 		synchronized(this) {
 			if (writeNdefRequest != null) {
-				writeNXP(intent);
-	//			writeNdef(
-	//				tag,
-	//				writeNdefRequest
-   //			);
+	//			writeNXP(intent);
+				writeNdef(
+					tag,
+					writeNdefRequest
+   				);
 				writeNdefRequest = null;
 
 				// explicitly return null, to avoid extra detection
