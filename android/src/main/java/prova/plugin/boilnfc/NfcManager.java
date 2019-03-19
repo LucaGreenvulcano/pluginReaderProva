@@ -384,7 +384,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 
 		NdefMessage message = request.message;
-		String msg = request.message;
+		String msg = (String) request.message;
 		NdefMessageWrapper ndefMW = new NdefMessageWrapper(createTextRecord(msg, Locale.ITALY, true));
 
 		Callback callback = request.callback;
