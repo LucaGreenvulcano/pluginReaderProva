@@ -383,7 +383,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		NTag213215216 tag_1 = (NTag213215216)NTagFactory.getInstance().getNTAG213( m_libInstance.getCustomModules() );
 
 
-		NdefMessage message = request.message;
+		INdefMessage message = request.message;
 		Callback callback = request.callback;
 		boolean formatReadOnly = request.formatReadOnly;
 		boolean format = request.format;
