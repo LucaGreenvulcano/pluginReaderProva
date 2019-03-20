@@ -82,7 +82,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	//*******
 
 	// private String TAG = NfcManager.class.getSimpleName();
-
+	private String TAG = "BoilPLuginProva";
 	private NxpNfcLib m_libInstance = null;  // The TapLinX library instance
 	private final String TAPLINX_KEY = "07698d782c5070246b1df1b1ed79adde";
 	//    private final byte[] pwd = new byte[]{0x01, 0x02, 0x03, 0x04};
@@ -868,11 +868,11 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 		synchronized(this) {
 			if (writeNdefRequest != null) {
-				writeNXP(intent);
-	//			writeNdef(
-	//				tag,
-	//				writeNdefRequest
-   //			);
+	//			writeNXP(intent);
+				writeNdef(
+					tag,
+					writeNdefRequest
+   				);
 				writeNdefRequest = null;
 
 				// explicitly return null, to avoid extra detection
