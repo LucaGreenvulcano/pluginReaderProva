@@ -81,8 +81,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 	//*******
 
-	// private String TAG = MainActivity.class.getSimpleName();
-	private String TAG = NfcManager.class.getSimpleName();
+	// private String TAG = NfcManager.class.getSimpleName();
 
 	private NxpNfcLib m_libInstance = null;  // The TapLinX library instance
 	private final String TAPLINX_KEY = "07698d782c5070246b1df1b1ed79adde";
@@ -95,7 +94,6 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 	//*******
 
-
 	private static final String LOG_TAG = "ReactNativeNfcManager";
     private final List<IntentFilter> intentFilters = new ArrayList<IntentFilter>();
     private final ArrayList<String[]> techLists = new ArrayList<String[]>();
@@ -107,6 +105,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	private TagTechnologyRequest techRequest = null;
 
 	//-----
+
 	private Intent ndefIntent = null;
 
 	private void initializeLibrary()
@@ -337,7 +336,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	}
 
 	@ReactMethod
-	public void requestNdefWrite(ReadableArray rnArray, ReadableMap options, Callback callback) {
+	public void requestNdefWritePersonalizzato(ReadableArray rnArray, ReadableMap options, Callback callback) {
 		synchronized(this) {
 			if (!isForegroundEnabled) {
 				callback.invoke("you should requestTagEvent first");
@@ -352,7 +351,6 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 				
 		        try {
 					NdefMessage msgToWrite;
-
 					/// the only case we allow ndef message to be null is when formatting, see:
 					/// https://developer.android.com/reference/android/nfc/tech/NdefFormatable.html#format(android.nfc.NdefMessage)
 					///	this API allows the `firstMessage` to be null
@@ -378,7 +376,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 	//***********************
 	@ReactMethod
-	private void writeNXP(ReadableArray rnArray)
+	private void writeNXP()
 	{
 		/*
 		NTag213215216 tag_1 = (NTag213215216)NTagFactory.getInstance().getNTAG213( m_libInstance.getCustomModules() );
@@ -450,19 +448,14 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		//	if( CardType.NTag213 == cardType )
 		//	{
 
-				byte[] bytes = rnArrayToBytes(rnArray);
-
 				NTag213215216 tag = (NTag213215216)NTagFactory.getInstance().getNTAG213( m_libInstance.getCustomModules() );
 				tag.getReader().connect();
-				//String msg = "123BRAND|BRAND CODE|MODEL|SIZE";
-				NdefMessageWrapper ndefMW = new NdefMessageWrapper(bytes);
+				String msg = "123BRAND|BRAND CODE|MODEL|SIZE";
+				NdefMessageWrapper ndefMW = new NdefMessageWrapper(createTextRecord(msg, Locale.ITALY, true));
 				try {
-
 				//	tag.clear();
 					tag.writeNDEF(ndefMW);
 					tag.getReader().close();
-
-
 /*
 					if(tag.isPageLocked(tag.getFirstUserpage())){
 						Log.d( TAG, "Authenticating...");
@@ -484,7 +477,6 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 						else{
 							Log.d( TAG, "NOT Authenticated!!!!");
 						}
-
 					}
 					else{
 						tag.clear();
@@ -876,11 +868,11 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 		synchronized(this) {
 			if (writeNdefRequest != null) {
-	//			writeNXP(intent);
-				writeNdef(
-					tag,
-					writeNdefRequest
-   				);
+				writeNXP(intent);
+	//			writeNdef(
+	//				tag,
+	//				writeNdefRequest
+   //			);
 				writeNdefRequest = null;
 
 				// explicitly return null, to avoid extra detection
