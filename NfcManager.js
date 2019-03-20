@@ -208,7 +208,7 @@ class NfcManager {
     }
 
     return new Promise((resolve, reject) => {
-      NativeNfcManager.scriviNFC(bytes, {format, formatReadOnly}, (err, result) => {
+      NativeNfcManager.requestNdefWrite(bytes, {format, formatReadOnly}, (err, result) => {
         if (err) {
           reject(err);
         } else {
