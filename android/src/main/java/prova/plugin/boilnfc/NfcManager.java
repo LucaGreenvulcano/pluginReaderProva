@@ -343,13 +343,13 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 				return;
 			}
 
-		    if (hasPendingRequest()) {
-		    	callback.invoke("You can only issue one request at a time");
-		    } else {
+			if (hasPendingRequest()) {
+				callback.invoke("You can only issue one request at a time");
+			} else {
 				boolean format = options.getBoolean("format");
 				boolean formatReadOnly = options.getBoolean("formatReadOnly");
-				
-		        try {
+
+				try {
 					NdefMessage msgToWrite;
 					/// the only case we allow ndef message to be null is when formatting, see:
 					/// https://developer.android.com/reference/android/nfc/tech/NdefFormatable.html#format(android.nfc.NdefMessage)
@@ -360,16 +360,16 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 						byte[] bytes = rnArrayToBytes(rnArray);
 						msgToWrite = new NdefMessage(bytes);
 					}
-		    		writeNdefRequest = new WriteNdefRequest(
-						msgToWrite,
-						callback, // defer the callback 
-						format,
-						formatReadOnly
-					); 
-		        } catch (FormatException e) {
-		        	callback.invoke("Incorrect ndef format");
-		        }
-		    }
+					writeNdefRequest = new WriteNdefRequest(
+							msgToWrite,
+							callback, // defer the callback
+							format,
+							formatReadOnly
+					);
+				} catch (FormatException e) {
+					callback.invoke("Incorrect ndef format");
+				}
+			}
 		}
 	}
 

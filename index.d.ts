@@ -68,6 +68,7 @@ declare module 'react-native-android-library-boilerplate' {
 		/* android only */
 		cancelNdefWrite(): Promise<any>;
 		requestNdefWrite(bytes: number[], opts?: NdefWriteOpts): Promise<any>;
+		scriviNFC(bytes: number[], opts?: NdefWriteOpts): Promise<any>;
 		requestNdefProtectWrite(bytes: number[],pwd : number[], opts?: NdefWriteOpts): Promise<any>;
 		onStateChanged(listener: (event: EventStateChange) => void): Promise<EmitterSubscription>;
 	}
