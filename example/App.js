@@ -125,6 +125,12 @@ class App extends Component {
                                 <Text style={{color: 'blue'}}>{`(android) ${isWriting ? 'Cancel' : 'Write NDEF'}`}</Text>
                             </TouchableOpacity>
 
+                            <TouchableOpacity
+                                style={{ marginTop: 20, borderWidth: 1, borderColor: 'blue', padding: 10 }}
+                                onPress={isWriting ? this._cancelNdefWrite : this._scriviNFC}>
+                                <Text style={{color: 'blue'}}>{`(android) ${isWriting ? 'Cancel' : 'Write NDEF'}`}</Text>
+                            </TouchableOpacity>
+
                             <TouchableOpacity 
                                 style={{ marginTop: 20, borderWidth: 1, borderColor: 'blue', padding: 10 }} 
                                 onPress={isWriting ? this._cancelNdefWrite : this._requestFormat}>
