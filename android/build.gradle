@@ -1,60 +1,64 @@
-buildscript {
-	repositories {
-		jcenter()
-	}
+import groovy.json.JsonSlurper
 
-	dependencies {
-		classpath 'com.android.tools.build:gradle:1.5.0'
-	}
+def computeVersionName() {
+    // dynamically retrieve version from package.json
+    def slurper = new JsonSlurper()
+    def json = slurper.parse(file('../package.json'), "utf-8")
+    return json.version
 }
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+    classpath 'com.android.tools.build:gradle:2.2.3'
+    }
+}
+
 apply plugin: 'com.android.library'
 
 android {
-	compileSdkVersion 26
-	buildToolsVersion "26.0.1"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
 
-	defaultConfig {
-		minSdkVersion 16
-	}
-	lintOptions {
-		abortOnError false
-	}
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 22
+        versionCode 1
+        // get version name from package.json version
+        versionName computeVersionName()
+    }
+    lintOptions {
+        abortOnError false
+    }
 }
 
-repositories {
-	mavenCentral()
-	maven {
-		// All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-		url "$rootDir/../node_modules/react-native/android"
-	}
+allprojects {
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+        maven {
+            credentials {
+                username "sdkuser"
+                password "taplinx"
+            }
+            url "\n" +
+                    "http://maven.taplinx.nxp.com/nexus/content/repositories/taplinxfiles/"
+        }
+        mavenCentral()
+        google()
+        jcenter()
+    }
 }
-
-
-repositories {
-	flatDir{
-		dirs 'libs'
-	}
-	google()
-	jcenter()
-	maven {
-		credentials{
-			username "sdkuser"
-			password "taplinx"
-		}
-
-		url "http://maven.taplinx.nxp.com/nexus/content/repositories/taplinx/"
-
-	}
-
-}
-
 
 dependencies {
-	compile 'com.facebook.react:react-native:[0.30.0,)'
-	implementation fileTree(dir: 'libs', include: ['*.jar'])
-	implementation 'com.facebook.react:react-native:+'
-	implementation ('taplinx-android:nxpnfcandroidlib:1.5@aar'){
-		transitive = true
-		changing = true
-	}
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.facebook.react:react-native:+'
+    implementation ('taplinx-android:nxpnfcandroidlib:1.5@aar'){
+        transitive = true
+        changing = true
+    }
 }
