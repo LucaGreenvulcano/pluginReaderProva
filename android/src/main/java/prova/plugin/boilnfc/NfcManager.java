@@ -533,7 +533,6 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 					Log.d( TAG, "Protecting...");
 					tag.setMemProtectionAndPwdVerificationForReadWriteAccess((byte)tag.getFirstUserpage(), false);
-/
 					Log.d( TAG, "setting Pwd and Pack...");
 					tag.programPWDPack(pwd, pack);
 
