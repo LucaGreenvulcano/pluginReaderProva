@@ -119,17 +119,7 @@ class App extends Component {
                                 <Text style={{color: 'blue'}}>{`(android) ${isWriting ? 'Cancel' : 'Write NDEF'}`}</Text>
                             </TouchableOpacity>
 
-                            <TouchableOpacity
-                                style={{ marginTop: 20, borderWidth: 1, borderColor: 'blue', padding: 10 }}
-                                onPress={isWriting ? this._cancelNdefWrite : this._scriviNFC}>
-                                <Text style={{color: 'blue'}}>{`(android) ${isWriting ? 'Cancel' : 'Write NDEF'}`}</Text>
-                            </TouchableOpacity>
 
-                            <TouchableOpacity
-                                style={{ marginTop: 20, borderWidth: 1, borderColor: 'blue', padding: 10 }}
-                                onPress={isWriting ? this._cancelNdefWrite : this._scriviNFC}>
-                                <Text style={{color: 'blue'}}>{`(android) ${isWriting ? 'Cancel' : 'Write NDEF'}`}</Text>
-                            </TouchableOpacity>
 
                             <TouchableOpacity 
                                 style={{ marginTop: 20, borderWidth: 1, borderColor: 'blue', padding: 10 }} 
@@ -164,11 +154,6 @@ class App extends Component {
             .catch(err => console.warn(err))
             .then(() => this.setState({isWriting: false}));
 
-        this.setState({isWriting: true});
-        NfcManager.scriviNFC(null, {format: true})
-            .then(() => console.log('format completed'))
-            .catch(err => console.warn(err))
-            .then(() => this.setState({isWriting: false}));
     }
 
     _requestNdefWrite = () => {
@@ -192,27 +177,6 @@ class App extends Component {
             .then(() => this.setState({isWriting: false}));
     }
 
-
-    _scriviNFC = () => {
-        let {isWriting, urlToWrite, rtdType} = this.state;
-        if (isWriting) {
-            return;
-        }
-
-        let bytes;
-
-        if (rtdType === RtdType.URL) {
-            bytes = buildUrlPayload(urlToWrite);
-        } else if (rtdType === RtdType.TEXT) {
-            bytes = buildTextPayload(urlToWrite);
-        }
-
-        this.setState({isWriting: true});
-        NfcManager.scriviNFC(bytes)
-            .then(() => console.log('write completed'))
-            .catch(err => console.warn(err))
-            .then(() => this.setState({isWriting: false}));
-    }
 
     _cancelNdefWrite = () => {
         this.setState({isWriting: false});

@@ -201,25 +201,6 @@ class NfcManager {
     })
   }
 
-
-  scriviNFC(bytes, {format=false, formatReadOnly=false}={}) {
-    if (Platform.OS === 'ios') {
-      return Promise.reject('not implemented');
-    }
-
-    return new Promise((resolve, reject) => {
-      NativeNfcManager.requestNdefWrite(bytes, {format, formatReadOnly}, (err, result) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(result);
-        }
-      })
-    })
-  }
-
-
-
   requestNdefProtectWrite(bytes, pwd, {format=false, formatReadOnly=false}={}) {
     if (Platform.OS === 'ios') {
       return Promise.reject('not implemented');

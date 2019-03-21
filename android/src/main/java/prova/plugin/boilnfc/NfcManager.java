@@ -378,44 +378,6 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	}
 
 
-	@ReactMethod
-	public void scriviNFC(ReadableArray rnArray, ReadableMap options, Callback callback) {
-		synchronized(this) {
-			if (!isForegroundEnabled) {
-				callback.invoke("you should requestTagEvent first");
-				return;
-			}
-
-			if (hasPendingRequest()) {
-				callback.invoke("You can only issue one request at a time");
-			} else {
-				boolean format = options.getBoolean("format");
-				boolean formatReadOnly = options.getBoolean("formatReadOnly");
-
-				try {
-					NdefMessage msgToWrite;
-					/// the only case we allow ndef message to be null is when formatting, see:
-					/// https://developer.android.com/reference/android/nfc/tech/NdefFormatable.html#format(android.nfc.NdefMessage)
-					///	this API allows the `firstMessage` to be null
-					if (format && rnArray == null) {
-						msgToWrite = null;
-					} else {
-						byte[] bytes = rnArrayToBytes(rnArray);
-						msgToWrite = new NdefMessage(bytes);
-					}
-					writeNdefRequest = new WriteNdefRequest(
-							msgToWrite,
-							callback, // defer the callback
-							format,
-							formatReadOnly
-					);
-				} catch (FormatException e) {
-					callback.invoke("Incorrect ndef format");
-				}
-			}
-		}
-	}
-
 	//***********************
 	@ReactMethod
 	private void writeNXP()
@@ -483,7 +445,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	//	}
 
 
-*/
+
 		try
 		{
 		//	CardType cardType = m_libInstance.getCardType( intent );
@@ -559,6 +521,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 		{
 			t.printStackTrace();
 		}
+		*/
 	}
 
 
