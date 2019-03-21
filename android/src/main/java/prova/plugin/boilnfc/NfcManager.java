@@ -111,8 +111,8 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	private void initializeLibrary()
 	{                                        // Initialize the TapLinx library
 		m_libInstance = NxpNfcLib.getInstance();
-		// m_libInstance.registerActivity( this.context, TAPLINX_KEY );
-		m_libInstance.registerActivity(getCurrentActivity(), TAPLINX_KEY);
+		m_libInstance.registerActivity( this.context, TAPLINX_KEY );
+		//m_libInstance.registerActivity(getCurrentActivity(), TAPLINX_KEY);
 		m_libInstance.startForeGroundDispatch();
 		this.show("inizializzato", 1000);
 
@@ -139,7 +139,11 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
         reactContext.addActivityEventListener(this);
 		reactContext.addLifecycleEventListener(this);
         Log.d(LOG_TAG, "NfcManager created");
-		// initializeLibrary();
+		initializeLibrary();
+	}
+
+	private Context getCurrentContext(){
+		return this.reactContext;
 	}
 
 	@Override
@@ -416,7 +420,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 	@ReactMethod
 	private void writeNXP()
 	{
-		/*
+/*
 		NTag213215216 tag_1 = (NTag213215216)NTagFactory.getInstance().getNTAG213( m_libInstance.getCustomModules() );
 
 
@@ -475,11 +479,11 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 
 			} catch (Exception ex) {
 				callback.invoke(ex.getMessage());
-			}*/
+			}
 	//	}
 
 
-
+*/
 		try
 		{
 		//	CardType cardType = m_libInstance.getCardType( intent );
@@ -494,7 +498,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 				//	tag.clear();
 					tag.writeNDEF(ndefMW);
 					tag.getReader().close();
-/*
+
 					if(tag.isPageLocked(tag.getFirstUserpage())){
 						Log.d( TAG, "Authenticating...");
 						tag.authenticatePwd(pwd, pack);
@@ -544,7 +548,7 @@ class NfcManager extends ReactContextBaseJavaModule implements ActivityEventList
 					String b = new String(bArr);
 					Log.d( TAG, "b: "+b);
 
-*/
+
 //                    NxpLogUtils.save();
 				} catch (Exception e) {
 					Log.d( TAG, e.getMessage());
