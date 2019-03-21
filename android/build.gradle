@@ -40,9 +40,6 @@ allprojects {
         flatDir {
             dirs 'libs'
         }
-        maven {
-
-        }
         mavenCentral()
         google()
         jcenter()
