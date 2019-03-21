@@ -41,12 +41,7 @@ allprojects {
             dirs 'libs'
         }
         maven {
-            credentials {
-                username "sdkuser"
-                password "taplinx"
-            }
-            url "\n" +
-                    "http://maven.taplinx.nxp.com/nexus/content/repositories/taplinxfiles/"
+
         }
         mavenCentral()
         google()
