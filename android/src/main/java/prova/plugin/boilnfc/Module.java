@@ -58,6 +58,6 @@ public class Module extends ReactContextBaseJavaModule {
   public void show(String msg) {
     //String message = "testo di prova";
     int duration = 1000;
-    Toast.makeText(getReactApplicationContext(), getCurrentActivity().GetType().Name, duration).show();
+    Toast.makeText(getReactApplicationContext(), getCurrentActivity(), duration).show();
   }
 }
